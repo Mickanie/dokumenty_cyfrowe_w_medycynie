@@ -1,2 +1,2 @@
-# dokumenty_cyfrowe_w_medycynie
+# System wspierania szpitala w rejestracji dokumentów cyfrowych
 Projekt z Dokumentów Cyfrowych w Medycynie
