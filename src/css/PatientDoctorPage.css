@@ -1,0 +1,24 @@
+/* $container-color: rgb(161, 194, 188); */
+nav {
+  margin: 40px 40px 0px 8%;
+}
+
+nav a {
+  border: 1px solid #969696;
+  background: #aaaaaa;
+  padding: 20px;
+  text-decoration: none;
+  border-radius: 10px 10px 0 0;
+  color: black;
+}
+
+nav a.active {
+  background: #989ebe;
+  border-bottom: none;
+}
+
+.ID-form {
+  position: absolute;
+  top: 10px;
+  left: 35%;
+}

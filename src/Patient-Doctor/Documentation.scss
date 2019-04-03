@@ -1,0 +1,44 @@
+@import '_config';
+
+/* .container {
+    @include containerStyle;
+} */
+
+
+
+.documentation-container {
+
+
+
+    button {
+        margin: 30px 40%;
+        
+    }
+    .documents {
+        text-align: left;
+    }
+    
+    .filterForm {
+        margin-top: 20px;
+        display: flex;
+        justify-content: center;
+        width: 100%;
+        flex-wrap: nowrap;
+    
+        input, select {
+            margin:  0 10px;
+            width: 120px;
+        }
+        
+    }
+
+    ul {
+
+        margin-top: 40px;
+        padding-left: 0;
+        li {
+            margin: 20px;
+        }
+    }
+
+}
