@@ -41,12 +41,12 @@ class SideBar extends Component {
     this.setState({
       tasks: this.state.tasks.map((task, i) => {
         if (i == index) {
-          task.completed = !task.completed;
+          task.completed = true;
         }
         return task;
       })
     });
-  };
+  }
   render() {
     return (
       <div className="side-bar">

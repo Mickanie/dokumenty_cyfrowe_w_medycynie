@@ -16,7 +16,7 @@ class Documentation extends Component {
       {
          title: "Konsultacja kardiologiczna 2019-01-17",
          id: 2,
-         content: 'blablabla'
+         content: 'Opis wizyty u kardiologa'
 
       },
 

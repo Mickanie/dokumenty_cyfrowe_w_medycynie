@@ -1,17 +1,12 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import './css/index.css';
-import App from './App';
-import { BrowserRouter } from 'react-router-dom';
-
-
-
+import React from "react";
+import ReactDOM from "react-dom";
+import "./css/index.css";
+import App from "./App";
+import { BrowserRouter } from "react-router-dom";
 
 ReactDOM.render(
-
-<BrowserRouter >
-<App />
-</BrowserRouter>
-, document.getElementById('root'));
-
-
+  <BrowserRouter basename={process.env.PUBLIC_URL}>
+    <App />
+  </BrowserRouter>,
+  document.getElementById("root")
+);

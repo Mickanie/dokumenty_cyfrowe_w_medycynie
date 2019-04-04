@@ -28,7 +28,8 @@ a {
   text-decoration: none;
 }
 
-input, select {
+input,
+select {
   margin: 20px;
   padding: 5px;
 }
@@ -43,7 +44,8 @@ input, select {
   box-shadow: 5px 5px 5px #585858;
 }
 
-button, input[type=submit] {
+button,
+input[type="submit"] {
   padding: 10px 20px;
   border: 0;
   border-radius: 5px 5px;
@@ -55,7 +57,8 @@ button, input[type=submit] {
   transition: all 0.3s ease-in-out;
 }
 
-button:hover, input[type=submit]:hover {
+button:hover,
+input[type="submit"]:hover {
   background: #121349;
 }
 
@@ -76,10 +79,11 @@ button:hover, input[type=submit]:hover {
 
 .register-container {
   margin: 15px auto;
-  height: 85vh;
+  height: 82vh;
 }
 
-.register-container p, .register-container h2 {
+.register-container p,
+.register-container h2 {
   text-align: center;
 }
 
@@ -93,7 +97,8 @@ button:hover, input[type=submit]:hover {
   padding: 7px;
 }
 
-.register-container form input, .register-container form select {
+.register-container form input,
+.register-container form select {
   float: right;
   width: 200px;
   margin-top: 0;

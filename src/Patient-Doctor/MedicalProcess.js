@@ -7,16 +7,19 @@ class MedicalProcess extends Component {
   state = {
     tasks: [
       {
+        id: 1,
         title: "Kontrola u lekarza prowadzącego",
         completed: false,
         details: "Za 2 tygodnie - w połowie kweitnia 2019 u dr Lubelskiej"
       },
       {
+        id: 2,
         title: "Badanie USG",
         completed: false,
         details: "Zaplanowane na 15.04 16:00, Przychodnia XXX pokój 203"
       },
       {
+        id: 3,
         title: "Wizyta u kardiologa",
         completed: true,
         details: `13.03.2019, 9:00, opis wizyty (link?), zalecenia (link)`
@@ -29,6 +32,7 @@ class MedicalProcess extends Component {
     const completed = e.target.completed.value === "done" ? true : false;
 
     const newTask = {
+      id: this.state.tasks.length+1,
       title: e.target.title.value,
       completed,
       details: e.target.details.value
@@ -41,11 +45,11 @@ class MedicalProcess extends Component {
 
   setCompleted = e => {
     console.log(e.target.id);
-    const index = e.target.id;
+    const index = e.target.id-1;
     this.setState({
       tasks: this.state.tasks.map((task, i) => {
         if (i == index) {
-          task.completed = !task.completed;
+          task.completed = true;
         }
         return task;
       })
@@ -79,7 +83,7 @@ class MedicalProcess extends Component {
                     {this.props.activeAccount === "doctor" && (
                       <button
                         className="set-done"
-                        id={i}
+                        id={task.id}
                         onClick={this.setCompleted}
                       >
                         ✓
