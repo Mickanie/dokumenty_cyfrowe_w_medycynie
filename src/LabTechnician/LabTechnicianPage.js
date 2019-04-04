@@ -14,8 +14,8 @@ class LabTechnicianPage extends Component {
 
   addParameter = e => {
     e.preventDefault();
-    const name = document.querySelector("#parameter").value;
-    const amount = document.querySelector("#result").value;
+    let name = document.querySelector("#parameter").value;
+    let amount = document.querySelector("#result").value;
 
     const newParameter = {
       name,
@@ -23,6 +23,7 @@ class LabTechnicianPage extends Component {
     };
 
     this.setState({ results: [...this.state.results, newParameter] });
+    document.querySelector("#result").value = "";
   };
 
   render() {
@@ -31,7 +32,8 @@ class LabTechnicianPage extends Component {
         <h2>Dodaj wynik badania</h2>
         <form className="form">
           <label htmlFor="patient-id">
-            ID pacjenta <input id="patient-id" type="text" required />
+            ID pacjenta{" "}
+            <input id="patient-id" type="text" required pattern="[0-9]{5}" />
           </label>
 
           <label>

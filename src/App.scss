@@ -39,7 +39,7 @@ select {
 .container {
   background: $container-color;
   width: 60%;
-  height: 65vh;
+  height: 60vh;
   margin: 20px 8%;
   border-radius: 0 10px 10px 10px;
   padding: 50px;
@@ -69,11 +69,16 @@ input[type="submit"] {
   flex-direction: column;
   align-content: center;
   text-align: center;
+  height: 67vh;
   form {
     display: flex;
     flex-direction: column;
     width: 30%;
     margin: 50px auto;
+    margin-bottom: 10px;
+  }
+  button {
+    margin-top: 0;
   }
 }
 .register-container {
@@ -87,11 +92,12 @@ input[type="submit"] {
 
   form {
     display: grid;
-    width: 40%;
+    width: 45%;
     margin: auto;
 
     span {
       padding: 7px;
+      height: 45px;
     }
     input,
     select {
