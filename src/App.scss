@@ -1,0 +1,117 @@
+@import "_config";
+
+.header {
+  background: rgb(100, 100, 136);
+  height: $header-height;
+  width: 100%;
+  position: relative;
+
+  .radio-buttons {
+    padding: 30px;
+  }
+
+  .log-out {
+    position: absolute;
+    top: 15px;
+    right: 10px;
+    margin: 15px;
+    background: rgb(63, 63, 63);
+
+    width: 200px;
+  }
+}
+
+ul {
+  list-style: none;
+}
+
+a {
+  color: black;
+  text-decoration: none;
+}
+
+input,
+select {
+  margin: 20px;
+  padding: 5px;
+}
+
+.container {
+  background: $container-color;
+  width: 60%;
+  height: 60vh;
+  margin: 20px 8%;
+  border-radius: 0 10px 10px 10px;
+  padding: 50px;
+  box-shadow: 5px 5px 5px rgb(88, 88, 88);
+}
+
+button,
+input[type="submit"] {
+  padding: 10px 20px;
+  border: 0;
+  border-radius: 5px 5px;
+  background: rgb(45, 54, 105);
+  color: white;
+
+  width: 200px;
+  margin: 20px auto;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+  &:hover {
+    background: rgb(18, 19, 73);
+  }
+}
+
+.login-container {
+  margin: 70px auto;
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+  text-align: center;
+  height: 67vh;
+  form {
+    display: flex;
+    flex-direction: column;
+    width: 30%;
+    margin: 50px auto;
+    margin-bottom: 10px;
+  }
+  button {
+    margin-top: 0;
+  }
+}
+.register-container {
+  margin: 15px auto;
+  height: 82vh;
+
+  p,
+  h2 {
+    text-align: center;
+  }
+
+  form {
+    display: grid;
+    width: 45%;
+    margin: auto;
+
+    span {
+      padding: 7px;
+      height: 45px;
+    }
+    input,
+    select {
+      float: right;
+      width: 200px;
+      margin-top: 0;
+    }
+
+    select {
+      width: 210px;
+    }
+  }
+}
+
+.content {
+  overflow-y: auto;
+}

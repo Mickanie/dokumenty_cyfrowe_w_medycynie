@@ -1,0 +1,37 @@
+.lab-container {
+  text-align: center;
+  width: 70%;
+  margin: 30px auto !important;
+}
+
+.lab-container form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 60%;
+  margin: 0 auto;
+}
+
+.lab-container form .inner-form, .lab-container form label {
+  display: flex;
+  align-items: center;
+}
+
+.lab-container form .inner-form input[type="text"], .lab-container form label input[type="text"] {
+  width: 150px;
+}
+
+.lab-container .table {
+  width: 90%;
+  margin: 30px auto;
+}
+
+.lab-container .table table {
+  width: 70%;
+  text-align: left;
+  margin: auto;
+}
+
+.lab-container .table table td {
+  margin: 10px;
+}

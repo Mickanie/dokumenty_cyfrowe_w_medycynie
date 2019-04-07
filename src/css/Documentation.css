@@ -1,0 +1,33 @@
+/* $container-color: rgb(161, 194, 188); */
+/* .container {
+    @include containerStyle;
+} */
+.documentation-container button {
+  margin: 30px 40%;
+}
+
+.documentation-container .documents {
+  text-align: left;
+}
+
+.documentation-container .filterForm {
+  margin-top: 20px;
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  flex-wrap: nowrap;
+}
+
+.documentation-container .filterForm input, .documentation-container .filterForm select {
+  margin: 0 10px;
+  width: 120px;
+}
+
+.documentation-container ul {
+  margin-top: 40px;
+  padding-left: 0;
+}
+
+.documentation-container ul li {
+  margin: 20px;
+}

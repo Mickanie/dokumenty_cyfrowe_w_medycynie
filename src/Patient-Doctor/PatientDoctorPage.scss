@@ -1,0 +1,29 @@
+@import "_config";
+
+nav {
+  margin: 40px 40px 0px 8%;
+
+  a {
+    border: 1px solid rgb(150, 150, 150);
+    
+    background: rgb(170, 170, 170);
+    padding: 20px;
+    text-decoration: none;
+    border-radius: 10px 10px 0 0;
+    color: black;
+  
+    
+
+    &.active {
+      background: $container-color;
+      border-bottom: none;
+      
+    }
+  }
+}
+
+.ID-form {
+  position: absolute;
+  top: 10px;
+  left: 35%;
+}

@@ -1,0 +1,33 @@
+/* $container-color: rgb(161, 194, 188); */
+.side-bar {
+  position: absolute;
+  top: 100px;
+  right: 0;
+  width: 15%;
+  height: 100vh;
+  background: #a9a9ad;
+  padding: 20px;
+}
+
+.side-bar button {
+  display: block;
+}
+
+.side-bar ul {
+  list-style: none;
+  padding-left: 0;
+}
+
+.side-bar ul input {
+  margin: 10px;
+}
+
+.side-bar form {
+  display: flex;
+  flex-direction: column;
+}
+
+.side-bar form input {
+  margin: 10px auto;
+  width: 200px;
+}
