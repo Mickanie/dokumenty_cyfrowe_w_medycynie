@@ -16,14 +16,17 @@ class LabTechnicianPage extends Component {
     e.preventDefault();
     let name = document.querySelector("#parameter").value;
     let amount = document.querySelector("#result").value;
-
-    const newParameter = {
-      name,
-      amount
-    };
-
-    this.setState({ results: [...this.state.results, newParameter] });
+    if (amount) {
+      const newParameter = {
+        name,
+        amount
+      };
+      this.setState({ results: [...this.state.results, newParameter] });
     document.querySelector("#result").value = "";
+    }
+
+
+    
   };
 
   render() {
@@ -34,6 +37,10 @@ class LabTechnicianPage extends Component {
           <label htmlFor="patient-id">
             ID pacjenta{" "}
             <input id="patient-id" type="text" required pattern="[0-9]{5}" />
+          </label>
+          <label htmlFor="collection-date">
+            Data pobrania{" "}
+            <input id="patient-id" type="date" />
           </label>
 
           <label>
@@ -75,7 +82,7 @@ class LabTechnicianPage extends Component {
                 </label>
                 <label>
                   Wartość
-                  <input type="text" name="result" id="result" />
+                  <input type="text" name="result" id="result" required/>
                 </label>
                 <input
                   type="submit"

@@ -2,6 +2,7 @@
   text-align: center;
   width: 70%;
   margin: 30px auto !important;
+  height: 67vh;
   form {
     display: flex;
     flex-direction: column;
@@ -11,11 +12,14 @@
 
     .inner-form,
     label {
-      display: flex;
-      align-items: center;
+      
+      
+      
 
-      input[type="text"] {
+      input[type="text"], input[type="date"] {
         width: 150px;
+      
+       
       }
     }
   }

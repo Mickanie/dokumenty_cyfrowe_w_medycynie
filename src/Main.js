@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import PatientPage from "./Patient-Doctor/PatientPage";
-import DoctorPage from "./Patient-Doctor/DoctorPage";
+import DoctorPage from "./Patient-Doctor/Doctor/DoctorPage";
 import LabTechnicianPage from "./LabTechnician/LabTechnicianPage";
 
 class Main extends Component {

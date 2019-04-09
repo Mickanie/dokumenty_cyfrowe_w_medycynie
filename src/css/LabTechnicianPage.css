@@ -2,6 +2,7 @@
   text-align: center;
   width: 70%;
   margin: 30px auto !important;
+  height: 67vh;
 }
 
 .lab-container form {
@@ -12,12 +13,9 @@
   margin: 0 auto;
 }
 
-.lab-container form .inner-form, .lab-container form label {
-  display: flex;
-  align-items: center;
-}
-
-.lab-container form .inner-form input[type="text"], .lab-container form label input[type="text"] {
+.lab-container form .inner-form input[type="text"], .lab-container form .inner-form input[type="date"],
+.lab-container form label input[type="text"],
+.lab-container form label input[type="date"] {
   width: 150px;
 }
 

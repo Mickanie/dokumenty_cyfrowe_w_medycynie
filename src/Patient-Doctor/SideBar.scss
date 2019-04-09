@@ -1,18 +1,16 @@
-@import "_config";
+$header-height: 100px;
 
 .side-bar {
   position: absolute;
   top: $header-height;
   right: 0;
-  width: 15%;
+  width: 18%;
   height: 100vh;
-  background: rgb(169, 169, 173);
+  background: rgb(201, 201, 201);
   padding: 20px;
 
   button {
- 
     display: block;
-  
   }
 
   ul {
@@ -22,15 +20,21 @@
     input {
       margin: 10px;
     }
-    
   }
 
   form {
     display: flex;
     flex-direction: column;
-    input { 
+    input {
       margin: 10px auto;
       width: 200px;
+    }
+  }
+
+  table {
+    td {
+      width: 50%;
+      padding: 4px;
     }
   }
 }

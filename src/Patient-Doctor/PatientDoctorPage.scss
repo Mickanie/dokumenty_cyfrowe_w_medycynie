@@ -1,7 +1,9 @@
-@import "_config";
 
+
+$container-color: rgb(228, 220, 196);
+$second-color: rgb(146, 146, 146);
 nav {
-  margin: 40px 40px 0px 8%;
+  margin: 40px 40px 0px 6%;
 
   a {
     border: 1px solid rgb(150, 150, 150);
@@ -16,7 +18,7 @@ nav {
 
     &.active {
       background: $container-color;
-      border-bottom: none;
+      border: 1px solid $container-color;
       
     }
   }

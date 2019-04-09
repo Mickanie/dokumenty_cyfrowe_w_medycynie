@@ -1,0 +1,27 @@
+.attachment-form {
+  width: 50%;
+  margin: 40px auto;
+  display: grid;
+  justify-content: center;
+
+  input[type="text"],
+  input[type="date"] {
+    float: right;
+    margin: 0 0 30px 40px;
+    width: 300px;
+  }
+}
+
+.lab-order-form {
+  display: grid;
+  justify-content: center;
+  .tests {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    justify-content: center;
+  }
+}
+
+h2 {
+  text-align: center;
+}

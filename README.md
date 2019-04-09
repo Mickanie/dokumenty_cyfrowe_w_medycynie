@@ -5,13 +5,15 @@ Projekt z Dokumentów Cyfrowych w Medycynie
 
 ##### Pierwsza wersja strony
 
+https://mickanie.github.io/dokumenty_cyfrowe_w_medycynie/
+
 Aby się zalogować na jakieś konto, trzeba podać login składający się z litery i 5 cyfr - tymczasowy system, jak będzie baza danych to będzie z niej odczytywało typ konta
 
 P - pacjent, D - doktor, L - laborant
 
 Hasło póki co dowolne
 
-W panelu Lekarza należy podać dowolny ciąg, żeby zobaczyć dane o Pacjencie.
+W panelu Lekarza należy podać ciąg 5 znaków, żeby zobaczyć dane o Pacjencie.
 
 Podczas rejestracji hasło: 8-12 cyfr, ma zawierać duże i małe litery, cyfry i znaki specjalne.
 
