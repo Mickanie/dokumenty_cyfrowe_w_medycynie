@@ -50,18 +50,43 @@ class SideBar extends Component {
      
   };
   render() {
+
+    const patient = this.props.patient;
     return (
       <div className="side-bar">
         <div className="patient-info">
           <h3>Dane osobowe</h3>
 
-          <ul>
-            <li>Imię i nazwisko: </li>
-            <li>PESEL: </li>
-            <li>Data urodzenia: </li>
-            <li>Adres: </li>
-            <li>Zdiagnozowane jednostki chorobowe: </li>
-          </ul>
+          <table>
+            <tbody>
+              <tr>
+                <td>Imię i nazwisko: </td>
+                <td> {patient.name} {patient.surname}  </td>
+              </tr>
+              <tr>
+                <td>Płeć: </td>
+                <td> {patient.sex}  </td>
+              </tr>
+              <tr>
+                <td>PESEL: </td>
+                <td> {patient.PESEL}   </td>
+              </tr>
+              <tr>
+                <td>Data urodzenia: </td>
+                <td> {patient.dob}  </td>
+              </tr>
+              <tr>
+                <td>Adres: </td>
+                <td> {patient.address}  </td>
+              </tr>
+              <tr>
+                <td>ICD10: </td>
+                <td> {patient.icd10} </td>
+              </tr>
+            </tbody>
+          </table>
+
+        
           {this.props.activeAccount === "doctor" && <button>Edytuj</button>}
         </div>
         <div className="todo-list">

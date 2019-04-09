@@ -1,11 +1,10 @@
-/* $container-color: rgb(161, 194, 188); */
 .side-bar {
   position: absolute;
   top: 100px;
   right: 0;
-  width: 15%;
+  width: 18%;
   height: 100vh;
-  background: #a9a9ad;
+  background: #c9c9c9;
   padding: 20px;
 }
 
@@ -30,4 +29,9 @@
 .side-bar form input {
   margin: 10px auto;
   width: 200px;
+}
+
+.side-bar table td {
+  width: 50%;
+  padding: 4px;
 }

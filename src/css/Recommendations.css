@@ -14,7 +14,7 @@
 
 .recommendation {
   padding: 10px 30px;
-  background: #6a6986;
+  background: #838383;
   text-align: left;
   cursor: pointer;
   color: white;
@@ -29,25 +29,30 @@
   align-items: center;
 }
 
+.form-container .submitButton {
+  margin: 0;
+}
+
 .form-container form {
   display: grid;
-  width: 40%;
+  width: 50%;
   border: 1px solid black;
   padding: 30px 0px 0px 30px;
 }
 
 .form-container form label {
-  width: 300px;
+  width: 400px;
 }
 
 .form-container form label input {
   float: right;
   margin: 0 0 20px 0;
-  width: 200px;
+  width: 300px;
 }
 
 .form-container form label textarea {
-  width: 210px;
+  width: 310px;
   float: right;
-  margin: 0 0 20px 0;
+  margin: 0;
+  height: 70px;
 }

@@ -1,7 +1,12 @@
 @import "_config";
 
+$container-color: rgb(228, 220, 196);
+$second-color: rgb(146, 146, 146);
+$accent-color: rgb(228, 171, 106);
+
 .header {
-  background: rgb(100, 100, 136);
+  //background: rgb(100, 100, 136);
+  background: $second-color;
   height: $header-height;
   width: 100%;
   position: relative;
@@ -15,7 +20,7 @@
     top: 15px;
     right: 10px;
     margin: 15px;
-    background: rgb(63, 63, 63);
+    background: $accent-color;
 
     width: 200px;
   }
@@ -40,9 +45,9 @@ select {
   background: $container-color;
   width: 60%;
   height: 60vh;
-  margin: 20px 8%;
+  margin: 20px 6%;
   border-radius: 0 10px 10px 10px;
-  padding: 50px;
+  padding: 20px 50px;
   box-shadow: 5px 5px 5px rgb(88, 88, 88);
 }
 
@@ -51,15 +56,16 @@ input[type="submit"] {
   padding: 10px 20px;
   border: 0;
   border-radius: 5px 5px;
-  background: rgb(45, 54, 105);
-  color: white;
+  //background: rgb(45, 54, 105);
+  background: $accent-color;
+  color: black;
 
   width: 200px;
   margin: 20px auto;
   cursor: pointer;
   transition: all 0.3s ease-in-out;
   &:hover {
-    background: rgb(18, 19, 73);
+    background: rgb(235, 154, 78);
   }
 }
 
@@ -83,7 +89,7 @@ input[type="submit"] {
 }
 .register-container {
   margin: 15px auto;
-  height: 82vh;
+  height: 85vh;
 
   p,
   h2 {
@@ -115,3 +121,4 @@ input[type="submit"] {
 .content {
   overflow-y: auto;
 }
+

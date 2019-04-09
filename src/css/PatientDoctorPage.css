@@ -1,6 +1,5 @@
-/* $container-color: rgb(161, 194, 188); */
 nav {
-  margin: 40px 40px 0px 8%;
+  margin: 40px 40px 0px 6%;
 }
 
 nav a {
@@ -13,8 +12,8 @@ nav a {
 }
 
 nav a.active {
-  background: #989ebe;
-  border-bottom: none;
+  background: #e4dcc4;
+  border: 1px solid #e4dcc4;
 }
 
 .ID-form {

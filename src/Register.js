@@ -14,6 +14,17 @@ class Register extends Component {
   goBack = () => {
     this.props.history.push("/");
   };
+
+  validatePassword = () => {
+    let password = document.getElementById("password");
+    let confirmPassword = document.getElementById("confirm-password");
+
+    if (password.value !== confirmPassword.value) {
+      confirmPassword.setCustomValidity("Hasła nie są jednakowe");
+    } else {
+      confirmPassword.setCustomValidity("");
+    }
+  };
   render() {
     return (
       <div className="container register-container">
@@ -41,13 +52,21 @@ class Register extends Component {
             <label htmlFor="surname">Nazwisko </label>
             <input type="text" name="surname" required />
           </span>
-          <span>
-            <label htmlFor="dob">Data urodzenia </label>
-            <input type="date" name="dob" required />
-          </span>
+          {this.state.accountType !== "doctor" && (
+            <span>
+              <label htmlFor="dob">Data urodzenia </label>
+              <input type="date" name="dob" required />
+            </span>
+          )}
           <span>
             <label htmlFor="pesel">PESEL </label>
-            <input type="text" name="pesel" id="pesel" required pattern="[0-9]{11}"/>
+            <input
+              type="text"
+              name="pesel"
+              id="pesel"
+              required
+              pattern="[0-9]{11}"
+            />
           </span>
           {this.state.accountType === "doctor" && (
             <>
@@ -67,7 +86,18 @@ class Register extends Component {
             <input
               type="password"
               required
+              id="password"
               pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*_=+-]).{8,12}$"
+            />
+          </span>
+          <span>
+            <label htmlFor="password">Powtórz hasło </label>
+            <input
+              type="password"
+              required
+              id="confirm-password"
+              pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*_=+-]).{8,12}$"
+              onChange={this.validatePassword}
             />
           </span>
 

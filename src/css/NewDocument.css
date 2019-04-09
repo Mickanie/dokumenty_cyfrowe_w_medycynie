@@ -1,0 +1,32 @@
+.new-document {
+  width: 60%;
+  margin: 20px auto;
+}
+
+.new-document input {
+  width: 300px;
+  margin: 0 20px 30px;
+  float: right;
+}
+
+.new-document input[type="submit"] {
+  width: 300px;
+  margin: auto;
+}
+
+.new-document select {
+  margin-left: 160px;
+  width: 310px;
+}
+
+.new-document textarea {
+  margin: 0 20px 20px 0;
+  width: 310px;
+  height: 100px;
+  float: right;
+}
+
+.new-document .document-form {
+  display: flex;
+  flex-direction: column;
+}
