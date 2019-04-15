@@ -38,7 +38,7 @@ class Register extends Component {
         <form>
           <span>
             <label>Typ konta: </label>
-            <select name="accoutType" onChange={this.chooseAccountType}>
+            <select name="accountType" onChange={this.chooseAccountType}>
               <option value="patient">Pacjent</option>
               <option value="doctor">Lekarz</option>
               <option value="lab">Laborant</option>

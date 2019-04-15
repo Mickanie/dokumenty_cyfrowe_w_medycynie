@@ -2,37 +2,25 @@ import React, { Component } from "react";
 
 import "../css/MedicalProcess.css";
 import "../css/App.css";
+import { transformFromDB } from '../DateParser'
 
 class MedicalProcess extends Component {
   state = {
-    tasks: [
-      {
-        id: 1,
-        title: "Kontrola u lekarza prowadzącego",
-        completed: false,
-        details: "Za 2 tygodnie - w połowie kweitnia 2019 u dr Lubelskiej"
-      },
-      {
-        id: 2,
-        title: "Badanie USG",
-        completed: false,
-        details: "Zaplanowane na 15.04 16:00, Przychodnia XXX pokój 203"
-      },
-      {
-        id: 3,
-        title: "Wizyta u kardiologa",
-        completed: true,
-        details: `13.03.2019, 9:00, opis wizyty (link?), zalecenia (link)`
-      }
-    ]
+    tasks: []
   };
+
+  componentDidMount() {
+    fetch("http://localhost:3000/medical-process")
+      .then(result => result.json())
+      .then(data => this.setState({ tasks: data }));
+  }
 
   addTask = e => {
     e.preventDefault();
     const completed = e.target.completed.value === "done" ? true : false;
 
     const newTask = {
-      id: this.state.tasks.length+1,
+      id: this.state.tasks.length-1,
       title: e.target.title.value,
       completed,
       details: e.target.details.value
@@ -45,7 +33,7 @@ class MedicalProcess extends Component {
 
   setCompleted = e => {
     console.log(e.target.id);
-    const index = e.target.id-1;
+    const index = e.target.id;
     this.setState({
       tasks: this.state.tasks.map((task, i) => {
         if (i == index) {
@@ -57,6 +45,10 @@ class MedicalProcess extends Component {
   };
 
   render() {
+    this.state.tasks.forEach((task, i) => {
+      task.id = i;
+    });
+    console.log(this.state.tasks);
     return (
       <div className="container medical-process-container">
         {this.props.activeAccount === "doctor" && (
@@ -89,13 +81,14 @@ class MedicalProcess extends Component {
                         ✓
                       </button>
                     )}
-                    {this.props.activeAccount === "doctor" && (
-                      <button className="set-done" id={i}>
-                        🖉
-                      </button>
-                    )}
+
+                    <button className="edit" id={i}>
+                      🖉
+                    </button>
+
                     <br />
                     {task.details}
+                    <span style={{ float: "right" }}>{transformFromDB(task.date)}</span>
                   </li>
                 );
               })}
@@ -109,13 +102,14 @@ class MedicalProcess extends Component {
                 return (
                   <li key={i}>
                     <strong>{task.title}</strong>
-                    {this.props.activeAccount === "doctor" && (
-                      <button className="set-done" id={i}>
-                        🖉
-                      </button>
-                    )}
+
+                    <button className="edit" id={i}>
+                      🖉
+                    </button>
+
                     <br />
                     {task.details}
+                    <span style={{ float: "right" }}>{transformFromDB(task.date)}</span>
                   </li>
                 );
               })}

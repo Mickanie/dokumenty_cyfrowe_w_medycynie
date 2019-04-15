@@ -1,4 +1,4 @@
-.medical-process-container .set-done {
+.medical-process-container .set-done, .medical-process-container .edit {
   border-radius: 50%;
   width: 25px;
   height: 25px;
@@ -11,7 +11,7 @@
 
 .medical-process-container .content {
   overflow-y: auto;
-  height: 60vh;
+  height: 50vh;
 }
 
 .medical-process-container form {

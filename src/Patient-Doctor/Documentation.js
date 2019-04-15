@@ -5,9 +5,9 @@ import { Link } from "react-router-dom";
 class Documentation extends Component {
   state = {
     documents: [
-      {
+      /*  {
         title: "Wynik badania krwi 2019-03-15",
-        documentType:"blood-test",
+        documentType: "blood-test",
         id: 1,
         content: "Tabelka HTML z badaniami"
       },
@@ -29,10 +29,20 @@ class Documentation extends Component {
         documentType: "ekg",
         id: 4,
         content: "EKG zrobione!"
-      }
+      } */
     ]
   };
+
+  componentDidMount() {
+    fetch("http://localhost:3000/documentation")
+      .then(result => result.json())
+      .then(data => this.setState({ documents: data }));
+
+      //TODO sort by date
+  }
   render() {
+    console.log(this.state.documents);
+
     return (
       <div className="container documentation-container">
         {this.props.activeAccount === "doctor" && (
@@ -53,7 +63,6 @@ class Documentation extends Component {
               <option value="imaging">Obrazowanie medyczne (TK/MRI)</option>
               <option value="angiography">Angiografia / Koronarografia</option>
               <option value="cardiology">Kardiologiczne</option>
-  
             </select>
           </label>
           <label>
@@ -68,7 +77,10 @@ class Documentation extends Component {
                 <li key={i}>
                   <Link
                     style={{ fontWeight: "600", textDecoration: "underline" }}
-                    to={`/documentation/document${document.id}`}
+                    to={
+                      `/documentation/document${document.id}`
+           
+                    }
                   >
                     {document.title}
                   </Link>

@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
+import { today, threeDaysAgo } from '../../DateParser'
 
 class NewRecommendationForm extends Component {
   state = {
@@ -8,21 +9,27 @@ class NewRecommendationForm extends Component {
     doctor: "",
     content: ""
   };
+  
 
   toggleSave = e => {
     e.preventDefault();
 
-    const { doctor, content } = e.target.parentElement;
+    const { date, content } = e.target.parentElement;
 
     this.setState({
       dataSaved: !this.state.dataSaved,
       content: content.value,
-     
-      doctor: doctor.value
+      date: date.value
     });
   };
+
+
   render() {
+
+
     return (
+
+   
       <div className="container form-container">
         <h2>Nowe zalecenie</h2>
         <Link
@@ -33,12 +40,11 @@ class NewRecommendationForm extends Component {
           <button>Powrót</button>
         </Link>
         <form>
-    
           <label>
-            Lekarz:
-            <input type="text" disabled={this.state.dataSaved} name="doctor" />
-          </label>
-          <label>
+            Data:
+            <input type="date" disabled={this.state.dataSaved} name="date" id="date" min={threeDaysAgo} max={today} defaultValue={today} />
+          </label> 
+           <label>
             Treść: <textarea disabled={this.state.dataSaved} name="content" />
           </label>
 
