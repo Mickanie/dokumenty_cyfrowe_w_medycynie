@@ -7,7 +7,7 @@ import LabTechnicianPage from "./LabTechnician/LabTechnicianPage";
 class Main extends Component {
   state = {
     activeAccount: localStorage.getItem("account") || "",
-    isLoggedIn: true
+    isLoggedIn: false
   };
 
   componentDidUpdate() {

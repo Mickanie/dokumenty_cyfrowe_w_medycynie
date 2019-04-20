@@ -30,7 +30,8 @@ class Register extends Component {
       <div className="container register-container">
         <h2>Zarejestruj się</h2>
         <button
-          style={{ position: "absolute", top: "5%", left: "350px" }}
+        className="backButton"
+
           onClick={this.goBack}
         >
           Powrót do logowania

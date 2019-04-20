@@ -3,6 +3,8 @@
   width: 70%;
   margin: 10px auto !important;
   height: 75vh;
+  overflow: auto;
+  
   form {
     display: flex;
     flex-direction: column;

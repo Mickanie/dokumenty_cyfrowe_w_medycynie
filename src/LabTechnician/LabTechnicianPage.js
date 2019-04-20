@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import "../css/LabTechnicianPage.css";
+import { today } from "../DateParser";
 
 class LabTechnicianPage extends Component {
   state = {
@@ -15,36 +16,59 @@ class LabTechnicianPage extends Component {
   addParameter = e => {
     e.preventDefault();
     let name = document.querySelector("#parameter").value;
-    let amount = document.querySelector("#result").value;
-    if (amount) {
+    let value = document.querySelector("#result").value;
+    //pobrać zakresy i jednostki dla parametru name
+    if (value) {
       const newParameter = {
         name,
-        amount
+        value,
+        type: this.state.resultType
+        //range
+        //unit
       };
       this.setState({ results: [...this.state.results, newParameter] });
-    document.querySelector("#result").value = "";
+      document.querySelector("#result").value = "";
     }
+  };
 
+  submitResult = e => {
+    e.preventDefault();
+    const collectionDate = e.target.collectionDate.value.split("T");
+    const title = `Badanie krwi ${collectionDate[0]}`;
+    const issueDate = today;
 
-    
+    console.log(title, collectionDate.join(" "));
+    fetch("https://medical-documentation.herokuapp.com/lab-result", {
+      method: "post",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        labPatientID: e.target.patientID.value,
+        title,
+        collectionDate: collectionDate.join(" "),
+        issueDate,
+
+        results: this.state.results
+      })
+    });
+    this.setState({ resultType: "", results: [] });
+    window.location.reload();
   };
 
   render() {
     return (
       <div className="container lab-container">
-        <h2>Dodaj wynik badania</h2>
-        <form className="form">
-          <label htmlFor="patient-id">
+        <h2>Dodaj wynik badania krwi</h2>
+        <form className="form" onSubmit={this.submitResult}>
+          <label htmlFor="patientID">
             ID pacjenta{" "}
-            <input id="patient-id" type="text" required pattern="[0-9]{5}" />
+            <input name="patientID" type="text" required pattern="[0-9]{5}" />
           </label>
-          <label htmlFor="collection-date">
-            Data pobrania{" "}
-            <input id="patient-id" type="date" />
+          <label htmlFor="collectionDate">
+            Data pobrania <input name="collectionDate" type="datetime-local" />
           </label>
 
           <label>
-            Typ wyniku
+            Typ badania
             <select
               name="result-type"
               onChange={this.chooseResultType}
@@ -82,7 +106,7 @@ class LabTechnicianPage extends Component {
                 </label>
                 <label>
                   Wartość
-                  <input type="text" name="result" id="result" required/>
+                  <input type="text" name="result" id="result" />
                 </label>
                 <input
                   type="submit"
@@ -109,7 +133,7 @@ class LabTechnicianPage extends Component {
                           <tr>
                             <td>{i + 1}</td>
                             <td>{this.state.results[i].name}</td>
-                            <td>{this.state.results[i].amount}</td>
+                            <td>{this.state.results[i].value}</td>
                             <td>zakres</td>
                             <td>jednostka</td>
                           </tr>

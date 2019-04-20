@@ -1,51 +1,87 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
-import { today, threeDaysAgo } from '../../DateParser'
+import { today, threeDaysAgo } from "../../DateParser";
+import "../../css/NewRecommendation.css";
 
-class NewRecommendationForm extends Component {
+class NewRecommendation extends Component {
   state = {
-    dataSaved: false,
-
-    doctor: "",
-    content: ""
+    dataSaved: JSON.parse(localStorage.getItem("saved")),
+    data: JSON.parse(localStorage.getItem("recommendationData")) || {},
+    attachments: JSON.parse(localStorage.getItem("attachments")) || []
   };
-  
 
-  toggleSave = e => {
+  toggleSave = async e => {
     e.preventDefault();
 
     const { date, content } = e.target.parentElement;
-
-    this.setState({
-      dataSaved: !this.state.dataSaved,
-      content: content.value,
-      date: date.value
-    });
+    if (!this.state.dataSaved) {
+      await this.setState({
+        dataSaved: true,
+        data: {
+          content: content.value,
+          date: date.value
+        }
+      });
+    } else {
+      await this.setState({
+        dataSaved: false,
+        data: {
+          content: "",
+          date: ""
+        }
+      });
+    }
+    await localStorage.setItem(
+      "recommendationData",
+      JSON.stringify(this.state.data)
+    );
+    await localStorage.setItem("saved", JSON.stringify(this.state.dataSaved));
   };
 
+  submitRecommendation = () => {
+    fetch("https://medical-documentation.herokuapp.com/new-recommendation", {
+      method: "post",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        date: document.getElementById("date").value,
+        content: document.getElementById("content").value,
+        attachments: this.state.attachments
+      })
+    });
+    localStorage.removeItem("saved");
+    localStorage.removeItem("recommendationData");
+    localStorage.removeItem("attachments");
+    this.props.history.push("/recommendations");
+  };
 
   render() {
-
-
     return (
-
-   
       <div className="container form-container">
         <h2>Nowe zalecenie</h2>
-        <Link
-          to="/recommendations"
-          className="backButton"
-          style={{ position: "absolute", top: "200px", left: "170px" }}
-        >
+        <Link to="/recommendations" className="backButton">
           <button>Powrót</button>
         </Link>
         <form>
           <label>
             Data:
-            <input type="date" disabled={this.state.dataSaved} name="date" id="date" min={threeDaysAgo} max={today} defaultValue={today} />
-          </label> 
-           <label>
-            Treść: <textarea disabled={this.state.dataSaved} name="content" />
+            <input
+              type="date"
+              disabled={this.state.dataSaved}
+              name="date"
+              id="date"
+              min={threeDaysAgo}
+              max={today}
+              defaultValue={this.state.data.date || today}
+            />
+          </label>
+          <label>
+            Treść:{" "}
+            <textarea
+              id="content"
+              disabled={this.state.dataSaved}
+              name="content"
+              defaultValue={this.state.data.content || ""}
+            />
           </label>
 
           <input
@@ -54,32 +90,43 @@ class NewRecommendationForm extends Component {
             onClick={this.toggleSave}
           />
         </form>
-
+        {this.state.attachments && (
+          <p className="attachments-info">
+            Załączniki:
+            {this.state.attachments.map((attachment, i) => {
+              return (
+                <Link
+                  key={i}
+                  className="attachments"
+                  to="/recommendations/attachments/:document"
+                >
+                  {attachment.title}
+                </Link>
+              );
+            })}
+          </p>
+        )}
         <p>
           Wygeneruj załącznik:{" "}
           <Link to="/recommendations/create-new/generate-prescription">
-            <button style={{ margin: "10px", width: "150px" }}>Recepta</button>
+            <button className="attachment-button">Recepta</button>
           </Link>
           <Link to="/recommendations/create-new/generate-sickleave">
-            <button style={{ margin: "10px", width: "150px" }}>
-              Zwolnienie
-            </button>
+            <button className="attachment-button">Zwolnienie</button>
           </Link>
           <Link to="/recommendations/create-new/generate-referral">
-            <button style={{ margin: "10px", width: "150px" }}>
-              Skierowanie
-            </button>
+            <button className="attachment-button">Skierowanie</button>
           </Link>
           <Link to="/recommendations/create-new/generate-lab-order">
-            <button style={{ margin: "10px", width: "150px" }}>
-              Zlecenie badania
-            </button>
+            <button className="attachment-button">Zlecenie badania</button>
           </Link>
         </p>
-        <button className="submit-button">Dodaj zalecenie</button>
+        <button className="submit-button" onClick={this.submitRecommendation}>
+          Dodaj zalecenie
+        </button>
       </div>
     );
   }
 }
 
-export default NewRecommendationForm;
+export default NewRecommendation;

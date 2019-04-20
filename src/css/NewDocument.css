@@ -5,16 +5,17 @@
 
 .new-document input {
   width: 300px;
-  margin: 0 20px 30px;
+  margin: 0 20px 10px 30px;
   float: right;
 }
 
 .new-document input[type="submit"] {
   width: 300px;
-  margin: auto;
+  margin: 0 auto;
 }
 
 .new-document select {
+  margin: 0 20px 10px 30px;
   margin-left: 160px;
   width: 310px;
 }

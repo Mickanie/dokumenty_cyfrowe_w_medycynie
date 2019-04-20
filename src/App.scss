@@ -1,28 +1,26 @@
 @import "_config";
 
-$container-color: rgb(228, 220, 196);
-$second-color: rgb(146, 146, 146);
-$accent-color: rgb(228, 171, 106);
 
+body {
+  font-size: 0.9em;
+}
 .header {
-  //background: rgb(100, 100, 136);
+
   background: $second-color;
   height: $header-height;
   width: 100%;
   position: relative;
 
   .radio-buttons {
-    padding: 30px;
+    padding: 25px;
   }
 
   .log-out {
     position: absolute;
-    top: 15px;
+    top: 12px;
     right: 10px;
     margin: 15px;
-    background: $accent-color;
-
-    width: 200px;
+ 
   }
 }
 
@@ -44,11 +42,12 @@ select {
 .container {
   background: $container-color;
   width: 60%;
-  height: 60vh;
-  margin: 20px 6%;
+  height: 65vh;
+  margin: 15px 6%;
   border-radius: 0 10px 10px 10px;
   padding: 20px 50px;
   box-shadow: 5px 5px 5px rgb(88, 88, 88);
+  position: relative;
 }
 
 button,
@@ -59,6 +58,7 @@ input[type="submit"] {
   //background: rgb(45, 54, 105);
   background: $accent-color;
   color: black;
+  font-size: 0.9em;
 
   width: 200px;
   margin: 20px auto;
@@ -75,7 +75,8 @@ input[type="submit"] {
   flex-direction: column;
   align-content: center;
   text-align: center;
-  height: 67vh;
+  height: 75vh;
+  border-radius: 10px;
   form {
     display: flex;
     flex-direction: column;
@@ -90,6 +91,7 @@ input[type="submit"] {
 .register-container {
   margin: 15px auto;
   height: 85vh;
+  border-radius: 10px;
 
   p,
   h2 {
@@ -98,12 +100,12 @@ input[type="submit"] {
 
   form {
     display: grid;
-    width: 45%;
+    width: 50%;
     margin: auto;
 
     span {
       padding: 7px;
-      height: 45px;
+      height: 40px;
     }
     input,
     select {
@@ -120,5 +122,11 @@ input[type="submit"] {
 
 .content {
   overflow-y: auto;
+}
+
+.backButton {
+  position: absolute;
+  top: 2%;
+  left: 30px
 }
 

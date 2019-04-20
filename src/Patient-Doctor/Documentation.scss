@@ -1,15 +1,4 @@
-@import '_config';
-
-/* .container {
-    @include containerStyle;
-} */
-
-
-
 .documentation-container {
-
-
-
     button {
         margin: 30px 40%;
         
@@ -19,9 +8,9 @@
     }
     
     .filterForm {
-        margin-top: 20px;
+        margin: 20px 0 0 20px;
         display: flex;
-        justify-content: center;
+        justify-content: flex-start;
         width: 100%;
         flex-wrap: nowrap;
     

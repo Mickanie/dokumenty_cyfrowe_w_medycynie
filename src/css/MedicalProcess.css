@@ -1,4 +1,5 @@
-.medical-process-container .set-done, .medical-process-container .edit {
+.medical-process-container .set-done,
+.medical-process-container .edit {
   border-radius: 50%;
   width: 25px;
   height: 25px;
@@ -24,13 +25,14 @@
 
 .medical-process-container form input,
 .medical-process-container form select {
-  margin-top: 10px;
-  flex: 1;
+  margin: 20px 5px 10px 5px;
+  flex: 2 1 250px;
 }
 
 .medical-process-container form textarea {
-  margin: 0 20px;
-  flex: 3 1 300px;
+  margin: 30px 10px 0 10px;
+  height: 50px;
+  flex: 2 1 300px;
 }
 
 .medical-process-container ul {

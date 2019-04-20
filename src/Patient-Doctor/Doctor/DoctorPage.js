@@ -9,32 +9,134 @@ import Document from "../Document";
 import SideBar from "../SideBar";
 import "../../css/PatientDoctorPage.css";
 import NewRecommendation from "./NewRecommendation";
-import NewAttachment from "./NewAttachemnt";
+import NewAttachment from "./NewAttachment";
 
 class DoctorPage extends Component {
   state = {
     patientID: "",
-    patient: {
-      id: "12345",
-      name: "Jan",
-      surname: "Kowalski",
-      age: "39",
-      PESEL: "80052212345",
-      dob: "22-05-1980",
-      sex: "M",
-      address: "ul. Tuwima 23, 73-123 Warszawa",
-      icd10: "G4.2, K13.1"
-    }
+    tasks: []
   };
 
-  searchPatient = e => {
+  componentDidMount() {
+    fetch("http://localhost:3000/medical-process")
+      .then(result => result.json())
+      .then(data => this.setState({ tasks: data }));
+  }
+  //MEDICAL PROCESS
+  addTask = async e => {
+    e.preventDefault();
+    const completed = e.target.completed.value === "done" ? true : false;
+
+    fetch("http://localhost:3000/new-task", {
+      method: "post",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        title: e.target.title.value,
+        date: e.target.date.value.split("T").join(" "),
+        completed,
+        details: e.target.details.value
+      })
+    })
+      .then(response => response.json())
+      .then(data => this.setState({ tasks: data }));
+
+    e.target.title.value = "";
+    e.target.details.value = "";
+    e.target.date.value = "";
+  };
+
+  setCompleted = e => {
+    console.log(e.target.id);
+    const id = e.target.id;
+    this.setState({
+      tasks: this.state.tasks.map((task, i) => {
+        if (task._id === id) {
+          task.completed = true;
+        }
+        return task;
+      })
+    });
+
+    fetch("http://localhost:3000/complete-task", {
+      method: "put",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ id: id })
+    });
+  };
+  //SIDE BAR
+  addTaskFromSideBar = e => {
+    e.preventDefault();
+
+    fetch("http://localhost:3000/new-task", {
+      method: "post",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        title: e.target.title.value,
+        date: "",
+        completed: false,
+        details: ""
+      })
+    })
+      .then(response => response.json())
+      .then(data => this.setState({ tasks: data }));
+
+    e.target.title.value = "";
+  };
+
+  toggleComplete = e => {
+    const id = e.target.id;
+    let isCompleted = "";
+    this.setState({
+      tasks: this.state.tasks.map((task, i) => {
+        if (task._id === id) {
+          task.completed = !task.completed;
+          isCompleted = task.completed;
+        }
+        return task;
+      })
+    });
+    //add to db
+    fetch("https://medical-documentation.herokuapp.com/complete-task", {
+      method: "put",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ id: id, completed: isCompleted })
+    });
+  };
+
+  searchPatient = async e => {
     e.preventDefault();
     /* e.target.patientID.setCustomValidity(
       "Wprowadź poprawne 5-cyfrowe ID pacjenta"
     ); */
-    
-    this.setState({ patientID: e.target.patientID.value });
+    let patientID;
+    if (!this.state.patientID) {
+      e.preventDefault();
+      patientID = e.target.patientID.value;
+      await fetch("https://medical-documentation.herokuapp.com/get-patient-data", {
+        method: "put",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ patientID })
+      })
+        .then(response => response.json())
+        .then(data => this.setState({ patientID: data }));
+
+      await fetch("https://medical-documentation.herokuapp.com/medical-process")
+        .then(result => result.json())
+        .then(data => {
+          console.log(data);
+          this.setState({ tasks: data });
+        });
+    } else {
+      this.setState({ patientID: "" });
+      e.target.patientID.value = "";
+      fetch("https://medical-documentation.herokuapp.com/get-patient-data", {
+        method: "put",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ patientID: "" })
+      });
+    }
   };
+
   render() {
     return (
       <div>
@@ -45,12 +147,21 @@ class DoctorPage extends Component {
             name="patientID"
             pattern="[0-9]{5}"
           />
-          <input type="submit" value="Znajdź pacjenta" />
+          <input
+            type="submit"
+            value={this.state.patientID ? "Zmień pacienta" : "Znajdź pacjenta"}
+          />
         </form>
 
         {this.state.patientID && (
           <div>
-            <SideBar activeAccount="doctor" patient={this.state.patient} />
+            <SideBar
+              activeAccount="doctor"
+              patient={this.state.patientID}
+              tasks={this.state.tasks}
+              addTask={this.addTaskFromSideBar}
+              toggleComplete={this.toggleComplete}
+            />
             <HashRouter>
               <nav>
                 <NavLink to="/documentation" activeClassName="active">
@@ -127,7 +238,13 @@ class DoctorPage extends Component {
                 <Route
                   path="/medical-process"
                   render={props => (
-                    <MedicalProcess {...props} activeAccount="doctor" />
+                    <MedicalProcess
+                      {...props}
+                      activeAccount="doctor"
+                      tasks={this.state.tasks}
+                      addTask={this.addTask}
+                      setCompleted={this.setCompleted}
+                    />
                   )}
                 />
 

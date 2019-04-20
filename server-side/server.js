@@ -1,9 +1,19 @@
 const express = require("express");
 const MongoClient = require("mongodb").MongoClient;
+const ObjectId = require("mongodb").ObjectId;
 const bodyParser = require("body-parser");
 const cors = require("cors");
 const router = express.Router();
-let patientID = "12345";
+
+let activeUser = {
+  accountType: "doctor", //z logowania
+  ID: "12121", //z logowania
+  name: "Adam Górski" //z bazy
+};
+let patientID = "11111";
+//let doctorID = "12312";
+//post do bazy danych po imię i nazwisko:
+let doctor = "Jan Kowalski";
 const client = new MongoClient(
   "mongodb+srv://dokumenty-cyfrowe:kardiologia@dokumentycyfrowe-ck4e6.gcp.mongodb.net/test?retryWrites=true",
   { useNewUrlParser: true }
@@ -25,6 +35,7 @@ collection.deleteOne(filters)
 const app = express();
 app.use(cors());
 app.use(express.json()); //żeby móc pracować z jsonem
+//app.use(fileUpload());
 app.use(bodyParser.urlencoded({ extended: true })); //do czytania formularzy
 app.use(bodyParser.json());
 app.use(router);
@@ -37,7 +48,6 @@ router.get("/database-test", async (req, res) => {
     .find({})
     .toArray();
   res.send(doctors);
- 
 });
 //test dodawania do bazy
 router.post("/database", (req, res) => {
@@ -50,6 +60,12 @@ router.post("/database", (req, res) => {
   };
   collection.insertOne(newDoctor);
   res.status(200).send("Added a doctor");
+});
+
+router.put("/get-patient-data", async (req, res) => {
+  patientID = req.body.patientID;
+  res.send(patientID);
+  return patientID;
 });
 
 router.get("/documentation", async (req, res) => {
@@ -106,6 +122,123 @@ router.get("/patient", async (req, res) => {
   return patient;
 });
 
+router.post("/new-document", async (req, res) => {
+  const db = client.db("DokumentyCyfrowe");
+  const {
+    documentType,
+    title,
+    testDate,
+    testTime,
+    orderingDoctor,
+    performingDoctor,
+    content
+  } = req.body;
+  newDocument = {
+    documentType,
+    title,
+    patientID, //from variable
+    testDate: `${testDate} ${testTime}`,
+    orderingDoctor,
+    performingDoctor,
+    describingDoctor: activeUser.name, //from variable
+    content
+  };
+  await db.collection("Badanie").insertOne(newDocument);
+  res.send(newDocument);
+});
+
+router.post("/new-recommendation", async (req, res) => {
+  const db = client.db("DokumentyCyfrowe");
+
+  const { date, content, attachments } = req.body;
+  const attachmentsShort = attachments.map(item => {
+    item = {
+      title: item.title,
+      id: item.id
+    };
+    return item;
+  });
+  const newRecommendation = {
+    date,
+    content,
+    patientID: patientID,
+    doctor: activeUser.name,
+    doctorID: activeUser.ID,
+    attachedDocuments: attachmentsShort
+  };
+  await db.collection("Zalecenie").insertOne(newRecommendation);
+  res.send(newRecommendation);
+});
+
+router.post("/attach-document", async (req, res) => {
+  const db = client.db("DokumentyCyfrowe");
+
+  const attachedDocument = req.body;
+  attachedDocument.doctor = activeUser.name;
+  attachedDocument.patientID = patientID;
+  await db.collection("Zalacznik").insertOne(attachedDocument);
+  res.send(attachedDocument._id);
+  return attachedDocument._id;
+});
+router.post("/new-task", async (req, res) => {
+  const db = client.db("DokumentyCyfrowe");
+  const { title, date, completed, details } = req.body;
+  const newTask = {
+    patientID,
+    title,
+    date,
+    completed,
+    details,
+    addedBy: doctor
+  };
+  await db.collection("Zadanie").insertOne(newTask);
+  //aktualizacja widoku
+  tasks = await db
+    .collection("Zadanie")
+    .find({ patientID })
+    .toArray();
+  res.send(tasks);
+  return tasks;
+});
+
+router.put("/complete-task", async (req, res) => {
+  //const id = "5cb6460e020b9b41ec522833"
+  const { id, completed } = req.body;
+  const db = client.db("DokumentyCyfrowe");
+  const obj = new ObjectId(id);
+  await db
+    .collection("Zadanie")
+    .updateOne({ _id: obj }, { $set: { completed } });
+  task = await db.collection("Zadanie").findOne({ _id: obj });
+  res.status(200).send(task);
+});
+
+//LABORANT
+router.post("/lab-result", async (req, res) => {
+  console.log(req.body);
+  const db = client.db("DokumentyCyfrowe");
+  const {
+    labPatientID,
+    title,
+    collectionDate,
+    issueDate,
+
+    results
+  } = req.body;
+  const newLabResult = {
+    patientID: labPatientID,
+    title,
+
+    collectionDate,
+    issueDate,
+    labTechnician: activeUser.name,
+    results
+  };
+  await db.collection("BadanieLaboratoryjne").insertOne(newLabResult);
+
+  res.status(200).send(newLabResult);
+});
+
 //LOGOWANIE
 router.post("/", (req, res) => {
   const { login, password } = req.body;
@@ -133,7 +266,7 @@ router.post("/register", (req, res) => {
 });
 
 client.connect(() => {
-  app.listen(3000, () => {
-    console.log("Server started on port 3000");
+  app.listen(process.env.PORT || 3000, () => {
+    console.log(`Server started on port ${process.env.PORT}`);
   });
 });

@@ -1,4 +1,4 @@
-$header-height: 100px;
+$header-height: 90px;
 
 .side-bar {
   position: absolute;
@@ -7,7 +7,11 @@ $header-height: 100px;
   width: 18%;
   height: 100vh;
   background: rgb(201, 201, 201);
-  padding: 20px;
+  padding: 15px 20px;
+
+  h3 {
+    margin: 10px 0 10px 0;
+  }
 
   button {
     display: block;
@@ -32,9 +36,11 @@ $header-height: 100px;
   }
 
   table {
+    width: 100%;
     td {
       width: 50%;
       padding: 4px;
+      
     }
   }
 }

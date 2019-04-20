@@ -32,7 +32,7 @@ class Recommendations extends Component {
   };
 
   componentDidMount() {
-    fetch("http://localhost:3000/recommendations")
+    fetch("https://medical-documentation.herokuapp.com/recommendations")
       .then(result => result.json())
       .then(data => this.setState({ recommendations: data }));
   }
@@ -49,7 +49,7 @@ class Recommendations extends Component {
           {this.state.recommendations.map((recommendation, i) => {
             return (
               <div className="recommendation" key={i}>
-                <p>Data: {transformFromDB(recommendation.date)} </p>
+                <p>Data: {recommendation.date} </p>
                 <p>Lekarz: {recommendation.doctor} </p>
                 <p>Treść: {recommendation.content}</p>
                 <p>
@@ -62,9 +62,9 @@ class Recommendations extends Component {
                         color: "white",
                         textDecoration: "underline"
                       }}
-                      to={`/recommendations/:${attachment}`}
+                      to={`/recommendations/attached-document-:${attachment.id}`}
                     >
-                      {attachment}
+                      {attachment.title}
                     </Link>
                   ))}
                 </p>
