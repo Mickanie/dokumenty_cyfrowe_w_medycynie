@@ -1,4 +1,5 @@
 # System wspierania szpitala w rejestracji dokumentów cyfrowych
+
 Projekt z Dokumentów Cyfrowych w Medycynie
 
 ## Front-End
@@ -19,7 +20,15 @@ Podczas rejestracji hasło: 8-12 cyfr, ma zawierać duże i małe litery, cyfry 
 
 ##### Work in progress
 
-- Wiele przycisków jeszcze nie ma funkcjonalności.
-- Póki nie ma bazy danych, dane są pobierane prowizorycznie z tablic.
-- Nie wszystkie podstrony są utworzone.
-- Grafika do poprawy.
+Do zrobienia
+
+- filtrowanie
+- sortowanie wyników chronologicznie
+- edycja zadań i danych pacjenta
+- dodawanie plików multimedialnych do bazy (IMG, PDF)
+
+Baza danych
+
+- słownik laboratoryjny (zakresy, jednostki parametrów)
+- słownik ICD10?
+

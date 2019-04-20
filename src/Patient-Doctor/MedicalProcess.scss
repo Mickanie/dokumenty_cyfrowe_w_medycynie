@@ -1,5 +1,6 @@
 .medical-process-container {
-  .set-done {
+  .set-done,
+  .edit {
     border-radius: 50%;
     width: 25px;
     height: 25px;
@@ -11,8 +12,8 @@
   }
 
   .content {
-      overflow-y: auto;
-      height: 60vh;
+    overflow-y: auto;
+    height: 50vh;
   }
 
   form {
@@ -23,14 +24,14 @@
     height: 70px;
     input,
     select {
-      margin-top: 10px;
-      flex: 1;
+      margin: 20px 5px 10px 5px;
+      flex: 2 1 250px;
     }
 
     textarea {
-      margin: 0 20px;
-
-      flex: 3 1 300px;
+      margin: 30px 10px 0 10px;
+      height: 50px;
+      flex: 2 1 300px;
     }
   }
 

@@ -4,40 +4,31 @@ import { Link } from "react-router-dom";
 
 class Documentation extends Component {
   state = {
-    documents: [
-      {
-        title: "Wynik badania krwi 2019-03-15",
-        documentType:"blood-test",
-        id: 1,
-        content: "Tabelka HTML z badaniami"
-      },
-      {
-        title: "Konsultacja kardiologiczna 2019-01-17",
-        documentType: "consultation",
-        id: 2,
-        content: "Opis wizyty u kardiologa"
-      },
-
-      {
-        title: "Wynik badania USG 2018-12-11",
-        documentType: "usg",
-        id: 3,
-        content: "USG opis"
-      },
-      {
-        title: "Wynik badania EKG 2018-09-22",
-        documentType: "ekg",
-        id: 4,
-        content: "EKG zrobione!"
-      }
-    ]
+    documents: []
   };
+
+  componentDidMount() {
+    fetch("https://medical-documentation.herokuapp.com/documentation")
+      .then(result => result.json())
+      .then(data => this.setState({ documents: data }));
+
+    //TODO sort by date
+  }
+
+  sort = (a, b) => {
+    a.date = a.date.split("-").join("");
+    b.date = b.date.split("-").join("");
+    return a.date > b.date ? 1 : a.date < b.date ? -1 : 0;
+  };
+
   render() {
+    //this.state.documents.sort();
+
     return (
       <div className="container documentation-container">
         {this.props.activeAccount === "doctor" && (
           <Link to="documentation/create-new">
-            <button>Dodaj dokument</button>
+            <button>Dodaj wynik badania</button>
           </Link>
         )}
         <form className="filterForm">
@@ -53,7 +44,6 @@ class Documentation extends Component {
               <option value="imaging">Obrazowanie medyczne (TK/MRI)</option>
               <option value="angiography">Angiografia / Koronarografia</option>
               <option value="cardiology">Kardiologiczne</option>
-  
             </select>
           </label>
           <label>
@@ -68,7 +58,7 @@ class Documentation extends Component {
                 <li key={i}>
                   <Link
                     style={{ fontWeight: "600", textDecoration: "underline" }}
-                    to={`/documentation/document${document.id}`}
+                    to={`/documentation/document${document._id}`}
                   >
                     {document.title}
                   </Link>

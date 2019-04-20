@@ -1,8 +1,9 @@
 .lab-container {
   text-align: center;
   width: 70%;
-  margin: 30px auto !important;
-  height: 67vh;
+  margin: 10px auto !important;
+  height: 75vh;
+  overflow: auto;
 }
 
 .lab-container form {
@@ -13,15 +14,17 @@
   margin: 0 auto;
 }
 
-.lab-container form .inner-form input[type="text"], .lab-container form .inner-form input[type="date"],
+.lab-container form .inner-form input[type="text"], .lab-container form .inner-form input[type="date"], .lab-container form .inner-form select,
 .lab-container form label input[type="text"],
-.lab-container form label input[type="date"] {
+.lab-container form label input[type="date"],
+.lab-container form label select {
   width: 150px;
+  margin-top: 4px;
 }
 
 .lab-container .table {
   width: 90%;
-  margin: 30px auto;
+  margin: 0 auto;
 }
 
 .lab-container .table table {

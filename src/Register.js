@@ -30,7 +30,8 @@ class Register extends Component {
       <div className="container register-container">
         <h2>Zarejestruj się</h2>
         <button
-          style={{ position: "absolute", top: "5%", left: "350px" }}
+        className="backButton"
+
           onClick={this.goBack}
         >
           Powrót do logowania
@@ -38,7 +39,7 @@ class Register extends Component {
         <form>
           <span>
             <label>Typ konta: </label>
-            <select name="accoutType" onChange={this.chooseAccountType}>
+            <select name="accountType" onChange={this.chooseAccountType}>
               <option value="patient">Pacjent</option>
               <option value="doctor">Lekarz</option>
               <option value="lab">Laborant</option>

@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import "../../css/NewDocument.css";
 import { Link } from "react-router-dom";
-
+import { today, threeDaysAgo } from "../../DateParser";
 class NewDocument extends Component {
   state = {
     documentType: ""
@@ -11,13 +11,37 @@ class NewDocument extends Component {
     this.setState({ documentType: e.target.value });
   };
 
+  createDocument = e => {
+    //console.log(e.target);
+    e.preventDefault();
+    const title = `${this.state.documentType}: ${
+      e.target.region.value ? e.target.region.value : ""
+    }  ${e.target.testDate.value}`;
+    console.log(title);
+    fetch("https://medical-documentation.herokuapp.com/new-document", {
+      method: "post",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        documentType: this.state.documentType,
+        title,
+        testDate: e.target.testDate.value,
+        //testTime: e.target.testTime.value,
+        orderingDoctor: e.target.orderingDoctor.value,
+        performingDoctor: e.target.performingDoctor.value,
+        content: e.target.content.value
+      })
+    });
+
+    this.props.history.push("/documentation");
+  };
+
   render() {
     return (
       <div className="container">
         <Link
           to="/documentation"
           className="backButton"
-          style={{ position: "absolute", top: "200px", left: "170px" }}
+          style={{ position: "absolute", top: "2%", left: "30px" }}
         >
           <button>Powrót</button>
         </Link>
@@ -26,41 +50,72 @@ class NewDocument extends Component {
           <label style={{ width: "70%", margin: "auto" }}>
             Typ dokumentu:
             <select
-              name="document-type"
+              name="documentType"
               onChange={this.chooseDocumentType}
               defaultValue="default"
             >
               <option value="default" disabled>
                 Wybierz typ
               </option>
-              <option value="usg">Badanie USG</option>
+              <option value="Badanie USG">Badanie USG</option>
 
-              <option value="ekg">Badanie EKG</option>
-              <option value="echo">Echo serca</option>
-              <option value="imaging">Obrazowanie medyczne (TK/MRI)</option>
-              <option value="angiography">Angiografia / Koronarografia</option>
-
-      
+              <option value="Badanie EKG">Badanie EKG</option>
+              <option value="Echokardiografia">Echokardiografia</option>
+              <option value="Tomografia komputerowa">
+                Tomografia komputerowa
+              </option>
+              <option value="Rezonans magnetyczny">Rezonans magnetyczny</option>
+              <option value="Angiografia">Angiografia / Koronarografia</option>
             </select>
           </label>
 
           {this.state.documentType && (
-            <form className="document-form">
-            
-              <label>
-                {" "}
-                Lekarz zlecający: <input type="text" name="ordering-doctor" />
-              </label>
-              <label>
-                {" "}
-                Treść: <textarea />
-              </label>
-       
+            <form className="document-form" onSubmit={this.createDocument}>
+              {(this.state.documentType == "Rezonans magnetyczny" ||
+                this.state.documentType == "Tomografia komputerowa") && (
                 <label>
                   {" "}
-                  Załączniki: <input type="file" />
+                  Badany obszar: <input type="text" name="region" required />
                 </label>
-              
+              )}
+
+              <label>
+                {" "}
+                Data badania:{" "}
+                <input
+                  type="datetime-local"
+                  name="testDate"
+                  min={threeDaysAgo}
+                  max={today}
+                  defaultValue={today}
+                  required
+                />
+              </label>
+              {/*   <label>
+                {" "}
+                Godzina badania: <input type="time" name="testTime" />
+              </label> */}
+
+              <label>
+                {" "}
+                Lekarz zlecający:{" "}
+                <input type="text" name="orderingDoctor" required />
+              </label>
+
+              <label>
+                {" "}
+                Lekarz wykonujący:{" "}
+                <input type="text" name="performingDoctor" required />
+              </label>
+              <label>
+                {" "}
+                Treść: <textarea required name="content" />
+              </label>
+              <label>
+                {" "}
+                Załączniki: <input type="file" multiple="multiple" />
+              </label>
+
               <input type="submit" value="Dodaj dokument" />
             </form>
           )}

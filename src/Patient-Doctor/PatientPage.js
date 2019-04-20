@@ -8,24 +8,21 @@ import SideBar from "./SideBar";
 import "../css/PatientDoctorPage.css";
 
 class PatientPage extends Component {
-
   state = {
-    patient: {
-      id: "12345",
-      name: "Jan",
-      surname: "Kowalski",
-      age: "39",
-      PESEL: "80052212345",
-      dob: "22-05-1980",
-      sex: "M",
-      address: "ul. Tuwima 23, 73-123 Warszawa",
-      icd10: "G4.2, K13.1",
-    }
+    patientID: "",
+    tasks: []
+  };
+
+  componentDidMount() {
+    fetch("https://medical-documentation.herokuapp.com/medical-process")
+      .then(result => result.json())
+      .then(data => this.setState({ tasks: data }));
   }
+
   render() {
     return (
       <div>
-        <SideBar patient={this.state.patient} />
+        <SideBar tasks={this.state.tasks} />
 
         <HashRouter>
           <nav>
@@ -42,7 +39,12 @@ class PatientPage extends Component {
           <Switch>
             <Route exact path="/documentation" component={Documentation} />
             <Route exact path="/recommendations" component={Recommendations} />
-            <Route exact path="/medical-process" component={MedicalProcess} />
+            <Route
+              path="/medical-process"
+              render={props => (
+                <MedicalProcess {...props} tasks={this.state.tasks} />
+              )}
+            />
             <Route
               exact
               path="/documentation/document:documentId"

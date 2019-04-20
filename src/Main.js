@@ -52,7 +52,7 @@ class Main extends Component {
           <div className="container login-container">
             <h2>Zaloguj się</h2>
             <form onSubmit={this.logIn}>
-              <label htmlFor="name">Użytkownik: </label>
+              <label htmlFor="login">Użytkownik: </label>
               <input type="text" name="login" pattern="[PDL]\d{5}" required />
               <label htmlFor="password">Hasło: </label>
               <input type="password" name="password" required />
