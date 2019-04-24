@@ -6,54 +6,76 @@ import LabTechnicianPage from "./LabTechnician/LabTechnicianPage";
 
 class Main extends Component {
   state = {
-    activeAccount: localStorage.getItem("account") || "",
-    isLoggedIn: false
+    activeAccount: JSON.parse(localStorage.getItem("account")) || "",
+    isLoggedIn: JSON.parse(localStorage.getItem("isLoggedIn")) || "false"
   };
 
   componentDidUpdate() {
     //because setState is asynchronous
-    localStorage.setItem("loggedIn", this.state.isLoggedIn);
-    localStorage.setItem("account", this.state.activeAccount);
+    localStorage.setItem("isLoggedIn", JSON.stringify(this.state.isLoggedIn));
+    localStorage.setItem("account", JSON.stringify(this.state.activeAccount));
   }
 
   changeAccount = e => {
     this.setState({ activeAccount: e.target.value });
   };
 
-  logIn = e => {
+  logIn = async e => {
     e.preventDefault();
-    console.log(e.target.login.value);
-    let activeAccount = "";
-    switch (e.target.login.value[0]) {
-      case "P":
-        activeAccount = "patient";
-        break;
-      case "D":
-        activeAccount = "doctor";
-        break;
-      case "L":
-        activeAccount = "lab";
-        break;
-      default:
-        activeAccount = "";
-    }
-    this.setState({ activeAccount, isLoggedIn: true });
+    await fetch("https://medical-documentation.herokuapp.com/login", {
+      method: "post",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        login: e.target.login.value,
+        password: e.target.password.value
+      })
+    })
+      .then(response => response.json())
+      .then(data => {
+        console.log(data);
+        if (data === "FAIL") {
+          document.querySelector("#login-info").innerHTML =
+            "Niepoprawny login i hasło";
+        } else {
+          this.setState({
+            activeAccount: data.accountType,
+            isLoggedIn: "true"
+          });
+        }
+      });
   };
 
-  logOut = () => {
-    this.setState({ activeAccount: "", isLoggedIn: false });
+  logOut = async () => {
+    this.setState({ activeAccount: "", isLoggedIn: "false" });
+    //await localStorage.setItem("isLoggedIn", false);
     this.props.history.push("/");
   };
 
   render() {
+    let infoText;
+    if (localStorage.getItem("generatedLogin")) {
+      infoText = `Twój wygenerowany login: ${localStorage.getItem(
+        "generatedLogin"
+      )}`;
+      localStorage.removeItem("generatedLogin");
+    } else {
+      infoText = <br />;
+    }
     return (
       <div>
-        {!this.state.isLoggedIn ? (
+        {this.state.isLoggedIn === "false" ? (
           <div className="container login-container">
             <h2>Zaloguj się</h2>
+            <p id="login-info">{infoText}</p>
             <form onSubmit={this.logIn}>
               <label htmlFor="login">Użytkownik: </label>
-              <input type="text" name="login" pattern="[PDL]\d{5}" required />
+              <input
+                type="text"
+                name="login"
+                pattern="[PDL]\d{5}"
+                placeholder="np. P12345, D12345, L12345"
+                required
+              />
               <label htmlFor="password">Hasło: </label>
               <input type="password" name="password" required />
               <input type="submit" value="Zaloguj" />

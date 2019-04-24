@@ -2,7 +2,7 @@ import React, { Component } from "react";
 
 import "../css/MedicalProcess.css";
 import "../css/App.css";
-import { transformFromDB } from "../DateParser";
+
 
 class MedicalProcess extends Component {
   state = {

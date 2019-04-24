@@ -16,9 +16,51 @@ class Documentation extends Component {
   }
 
   sort = (a, b) => {
-    a.date = a.date.split("-").join("");
-    b.date = b.date.split("-").join("");
+    a.date = parseInt(a.date.split(" ")[0].split("-").join(""));
+    b.date = parseInt(b.date.split(" ")[0].split("-").join(""));
     return a.date > b.date ? 1 : a.date < b.date ? -1 : 0;
+  };
+
+  filterResults = async e => {
+    e.preventDefault();
+    const fromDate = parseInt(e.target.fromDate.value.split("-").join("")) || null;
+    const toDate = parseInt(e.target.toDate.value.split("-").join("")) || null;
+    const tag = e.target.tags.value;
+    await fetch("https://medical-documentation.herokuapp.com/documentation")
+      .then(result => result.json())
+      .then(data => this.setState({ documents: data }));
+   
+    console.log(fromDate, toDate);
+     const filtered = this.state.documents
+      .filter(document => {
+        if (tag !== "all") {
+          return document.documentType === tag;
+        } else {
+          return true;
+        }
+      })
+      .filter(document => {
+        if (fromDate && toDate) {
+          return (
+            parseInt(
+              document.date
+                .split(" ")[0]
+                .split("-")
+                .join("")
+            ) >= fromDate &&
+            parseInt(
+              document.date
+                .split(" ")[0]
+                .split("-")
+                .join("")
+            ) <= toDate
+          );
+        } else {
+          return true;
+        }
+      });
+
+    this.setState({ documents: filtered });
   };
 
   render() {
@@ -31,23 +73,24 @@ class Documentation extends Component {
             <button>Dodaj wynik badania</button>
           </Link>
         )}
-        <form className="filterForm">
+        <form className="filterForm" onSubmit={this.filterResults}>
           <label>
             Filtruj po tagu:{" "}
             <select name="tags">
               <option value="all">Wszystko</option>
-              <option value="blood-test">Badanie krwi</option>
-              <option value="usg">Badanie USG</option>
-
-              <option value="ekg">Badanie EKG</option>
-              <option value="echo">Echo serca</option>
-              <option value="imaging">Obrazowanie medyczne (TK/MRI)</option>
-              <option value="angiography">Angiografia / Koronarografia</option>
-              <option value="cardiology">Kardiologiczne</option>
+              <option value="Badanie krwi">Badanie krwi</option>
+              <option value="Badanie USG">Badanie USG</option>
+              <option value="Badanie EKG">Badanie EKG</option>
+              <option value="Echokardiografia">Echokardiografia</option>
+              <option value="Tomografia komputerowa">Tomografia komputerowa
+              </option>
+              <option value="Rezonans magnetyczny">Rezonans magnetyczny</option>
+              <option value="Angiografia">Angiografia / Koronarografia</option>
             </select>
           </label>
           <label>
-            Filtruj po dacie: od <input type="date" /> do <input type="date" />
+            Filtruj po dacie: od <input type="date" name="fromDate" /> do{" "}
+            <input type="date" name="toDate" />
           </label>
           <input type="submit" value="Filtruj" />
         </form>

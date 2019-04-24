@@ -35,7 +35,7 @@ class LabTechnicianPage extends Component {
     e.preventDefault();
     const collectionDate = e.target.collectionDate.value.split("T");
     const title = `Badanie krwi ${collectionDate[0]}`;
-    const issueDate = today;
+    const date = today;
 
     console.log(title, collectionDate.join(" "));
     fetch("https://medical-documentation.herokuapp.com/lab-result", {
@@ -45,7 +45,7 @@ class LabTechnicianPage extends Component {
         labPatientID: e.target.patientID.value,
         title,
         collectionDate: collectionDate.join(" "),
-        issueDate,
+        date,
 
         results: this.state.results
       })

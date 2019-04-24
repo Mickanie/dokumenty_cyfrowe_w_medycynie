@@ -4,7 +4,8 @@ import React, { Component } from "react";
 
 class Register extends Component {
   state = {
-    accountType: "patient"
+    accountType: "patient",
+    generatedLogin: "",
   };
 
   chooseAccountType = e => {
@@ -25,18 +26,60 @@ class Register extends Component {
       confirmPassword.setCustomValidity("");
     }
   };
+
+  registerUser = async e => {
+    
+    e.preventDefault();
+    if (this.state.accountType === "doctor") {
+      fetch("https://medical-documentation.herokuapp.com/register", {
+        method: "post",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          accountType: this.state.accountType,
+          name: e.target.name.value,
+          surname: e.target.surname.value,
+          pesel: e.target.pesel.value,
+          PWZ: e.target.PWZ.value,
+          specialization: e.target.specialization.value,
+          password: e.target.password.value
+        })
+      })
+      .then(result => result.json())
+      .then(data => {
+        this.setState({generatedLogin: data.login});
+      });
+    await localStorage.setItem("generatedLogin", this.state.generatedLogin);
+    } else {
+      await fetch("https://medical-documentation.herokuapp.com/register", {
+        method: "post",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          accountType: this.state.accountType,
+          name: e.target.name.value,
+          surname: e.target.surname.value,
+          pesel: e.target.pesel.value,
+          dob: e.target.dob.value,
+          sex: e.target.sex.value,
+          address: e.target.address.value,
+          password: e.target.password.value
+        })
+      })
+        .then(result => result.json())
+        .then(data => {
+          this.setState({generatedLogin: data.login});
+        });
+      await localStorage.setItem("generatedLogin", this.state.generatedLogin);
+    }
+    this.props.history.push("/");
+  };
   render() {
     return (
       <div className="container register-container">
         <h2>Zarejestruj się</h2>
-        <button
-        className="backButton"
-
-          onClick={this.goBack}
-        >
+        <button className="backButton" onClick={this.goBack}>
           Powrót do logowania
         </button>
-        <form>
+        <form onSubmit={this.registerUser}>
           <span>
             <label>Typ konta: </label>
             <select name="accountType" onChange={this.chooseAccountType}>
@@ -52,6 +95,10 @@ class Register extends Component {
           <span>
             <label htmlFor="surname">Nazwisko </label>
             <input type="text" name="surname" required />
+          </span>
+          <span>
+            <label htmlFor="surname">Płeć </label>
+            <input type="text" name="sex" required />
           </span>
           {this.state.accountType !== "doctor" && (
             <span>
@@ -82,13 +129,19 @@ class Register extends Component {
               </span>
             </>
           )}
+          {this.state.accountType !== "doctor" && (
+            <span>
+              <label htmlFor="surname">Adres </label>
+              <input type="text" name="address" required />
+            </span>
+          )}
           <span>
             <label htmlFor="password">Hasło </label>
             <input
               type="password"
               required
               id="password"
-              pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*_=+-]).{8,12}$"
+              //pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*_=+-]).{8,12}$"
             />
           </span>
           <span>
@@ -97,21 +150,10 @@ class Register extends Component {
               type="password"
               required
               id="confirm-password"
-              pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*_=+-]).{8,12}$"
+              //pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*_=+-]).{8,12}$"
               onChange={this.validatePassword}
             />
           </span>
-
-          {this.state.accountType === "patient" && (
-            <p>Wygenerowany dla Ciebie login to: P12345 </p>
-          )}
-          {this.state.accountType === "doctor" && (
-            <p>Wygenerowany dla Ciebie login to: D12321 </p>
-          )}
-          {this.state.accountType === "lab" && (
-            <p>Wygenerowany dla Ciebie login to: L10010 </p>
-          )}
-
           <input type="submit" value="Zarejestruj się" />
         </form>
       </div>

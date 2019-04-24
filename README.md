@@ -22,13 +22,12 @@ Podczas rejestracji hasło: 8-12 cyfr, ma zawierać duże i małe litery, cyfry 
 
 Do zrobienia
 
-- filtrowanie
 - sortowanie wyników chronologicznie
 - edycja zadań i danych pacjenta
 - dodawanie plików multimedialnych do bazy (IMG, PDF)
+- responsywność
 
 Baza danych
 
 - słownik laboratoryjny (zakresy, jednostki parametrów)
 - słownik ICD10?
-

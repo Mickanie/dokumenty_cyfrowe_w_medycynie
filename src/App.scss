@@ -77,6 +77,10 @@ input[type="submit"] {
   text-align: center;
   height: 75vh;
   border-radius: 10px;
+
+  #login-info {
+    margin: 5px 0 0 0;
+  }
   form {
     display: flex;
     flex-direction: column;
