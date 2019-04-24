@@ -6,14 +6,14 @@ import LabTechnicianPage from "./LabTechnician/LabTechnicianPage";
 
 class Main extends Component {
   state = {
-    activeAccount: localStorage.getItem("account") || "",
-    isLoggedIn: false
+    activeAccount: JSON.parse(localStorage.getItem("account")) || "",
+    isLoggedIn: JSON.parse(localStorage.getItem("isLoggedIn")) || "false"
   };
 
   componentDidUpdate() {
     //because setState is asynchronous
-    localStorage.setItem("loggedIn", this.state.isLoggedIn);
-    localStorage.setItem("account", this.state.activeAccount);
+    localStorage.setItem("isLoggedIn", JSON.stringify(this.state.isLoggedIn));
+    localStorage.setItem("account", JSON.stringify(this.state.activeAccount));
   }
 
   changeAccount = e => {
@@ -34,25 +34,39 @@ class Main extends Component {
       .then(data => {
         console.log(data);
         if (data === "FAIL") {
-          document.querySelector('#login-info').innerHTML = "Niepoprawny login i hasło"
+          document.querySelector("#login-info").innerHTML =
+            "Niepoprawny login i hasło";
         } else {
-          this.setState({ activeAccount: data.accountType, isLoggedIn: true });
+          this.setState({
+            activeAccount: data.accountType,
+            isLoggedIn: "true"
+          });
         }
       });
   };
 
-  logOut = () => {
-    this.setState({ activeAccount: "", isLoggedIn: false });
+  logOut = async () => {
+    this.setState({ activeAccount: "", isLoggedIn: "false" });
+    //await localStorage.setItem("isLoggedIn", false);
     this.props.history.push("/");
   };
 
   render() {
+    let infoText;
+    if (localStorage.getItem("generatedLogin")) {
+      infoText = `Twój wygenerowany login: ${localStorage.getItem(
+        "generatedLogin"
+      )}`;
+      localStorage.removeItem("generatedLogin");
+    } else {
+      infoText = <br />;
+    }
     return (
       <div>
-        {!this.state.isLoggedIn ? (
+        {this.state.isLoggedIn === "false" ? (
           <div className="container login-container">
             <h2>Zaloguj się</h2>
-            <p id="login-info"><br></br></p>
+            <p id="login-info">{infoText}</p>
             <form onSubmit={this.logIn}>
               <label htmlFor="login">Użytkownik: </label>
               <input
@@ -63,12 +77,7 @@ class Main extends Component {
                 required
               />
               <label htmlFor="password">Hasło: </label>
-              <input
-                type="password"
-                name="password"
-                placeholder="póki co dowolne"
-                required
-              />
+              <input type="password" name="password" required />
               <input type="submit" value="Zaloguj" />
             </form>
             <p>Nie masz konta?</p>
