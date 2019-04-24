@@ -4,17 +4,21 @@ import "../css/Document.css";
 
 class Document extends Component {
   state = {
-    documents: []
+    documents: [],
+	patients: []
   };
 
-  componentDidMount() {
-    fetch("https://medical-documentation.herokuapp.com/documentation")
+  async componentDidMount() {
+    await fetch("https://medical-documentation.herokuapp.com/documentation")
       .then(result => result.json())
       .then(data => this.setState({ documents: data }));
+	await fetch("https://medical-documentation.herokuapp.com/patient")
+      .then(result => result.json())
+      .then(data => this.setState({ patients: data }));
   }
 
   render() {
-    if (this.state.documents.length) {
+    if (this.state.documents.length && this.state.patients) {
       // console.log(this.state.documents);
       let currentDocument;
       this.state.documents.forEach(document => {
@@ -23,6 +27,15 @@ class Document extends Component {
           currentDocument = document;
         }
       });
+	  
+	  let currentPatient;
+	  currentPatient = this.state.patients;
+      /*this.state.patients.forEach(document => {
+		  alert(document.patientID + " " + currentDocument.patientID);
+        if (document.patientID === currentDocument.patientID) {
+          currentPatient = document;
+        }
+      });*/
 
       console.log(currentDocument);
       return (
@@ -66,11 +79,19 @@ class Document extends Component {
               </table>
             </div>
           )}
-          <button>Zapisz do PDF</button>
+          <button onClick={() => this.handleClick(currentDocument, currentPatient)}>Zapisz do PDF</button>
         </div>
       );
     }
     return null;
+  }
+  
+  handleClick(currentDocument, currentPatient) {
+	const FileSaver = require('file-saver');
+	const filePatient = new File([JSON.stringify(currentPatient)], 'patient.json', {type: "text/plain;charset=utf-8"});
+	FileSaver.saveAs(filePatient);
+	const fileResults = new File([JSON.stringify(currentDocument)], 'results.json', {type: "text/plain;charset=utf-8"});
+	FileSaver.saveAs(fileResults);
   }
 }
 
