@@ -18,7 +18,7 @@ class DoctorPage extends Component {
   };
 
   componentDidMount() {
-    fetch("http://localhost:3000/medical-process")
+    fetch("https://medical-documentation.herokuapp.com/medical-process")
       .then(result => result.json())
       .then(data => this.setState({ tasks: data }));
   }
@@ -27,7 +27,7 @@ class DoctorPage extends Component {
     e.preventDefault();
     const completed = e.target.completed.value === "done" ? true : false;
 
-    fetch("http://localhost:3000/new-task", {
+    fetch("https://medical-documentation.herokuapp.com/new-task", {
       method: "post",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
@@ -57,7 +57,7 @@ class DoctorPage extends Component {
       })
     });
 
-    fetch("http://localhost:3000/complete-task", {
+    fetch("https://medical-documentation.herokuapp.com/complete-task", {
       method: "put",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ id: id })
@@ -67,7 +67,7 @@ class DoctorPage extends Component {
   addTaskFromSideBar = e => {
     e.preventDefault();
 
-    fetch("http://localhost:3000/new-task", {
+    fetch("https://medical-documentation.herokuapp.com/new-task", {
       method: "post",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
@@ -112,11 +112,14 @@ class DoctorPage extends Component {
     if (!this.state.patientID) {
       e.preventDefault();
       patientID = e.target.patientID.value;
-      await fetch("https://medical-documentation.herokuapp.com/get-patient-data", {
-        method: "put",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ patientID })
-      })
+      await fetch(
+        "https://medical-documentation.herokuapp.com/get-patient-data",
+        {
+          method: "put",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ patientID })
+        }
+      )
         .then(response => response.json())
         .then(data => this.setState({ patientID: data }));
 
@@ -141,12 +144,13 @@ class DoctorPage extends Component {
     return (
       <div>
         <form className="ID-form" onSubmit={this.searchPatient}>
+        <label>Testowe ID pacjentów: 11111 i 12345
           <input
             type="text"
             placeholder="Wpisz ID pacjenta"
             name="patientID"
             pattern="[0-9]{5}"
-          />
+          /></label>
           <input
             type="submit"
             value={this.state.patientID ? "Zmień pacienta" : "Znajdź pacjenta"}

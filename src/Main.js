@@ -20,24 +20,25 @@ class Main extends Component {
     this.setState({ activeAccount: e.target.value });
   };
 
-  logIn = e => {
+  logIn = async e => {
     e.preventDefault();
-    console.log(e.target.login.value);
-    let activeAccount = "";
-    switch (e.target.login.value[0]) {
-      case "P":
-        activeAccount = "patient";
-        break;
-      case "D":
-        activeAccount = "doctor";
-        break;
-      case "L":
-        activeAccount = "lab";
-        break;
-      default:
-        activeAccount = "";
-    }
-    this.setState({ activeAccount, isLoggedIn: true });
+    await fetch("https://medical-documentation.herokuapp.com/login", {
+      method: "post",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        login: e.target.login.value,
+        password: e.target.password.value
+      })
+    })
+      .then(response => response.json())
+      .then(data => {
+        console.log(data);
+        if (data === "FAIL") {
+          document.querySelector('#login-info').innerHTML = "Niepoprawny login i hasło"
+        } else {
+          this.setState({ activeAccount: data.accountType, isLoggedIn: true });
+        }
+      });
   };
 
   logOut = () => {
@@ -51,11 +52,23 @@ class Main extends Component {
         {!this.state.isLoggedIn ? (
           <div className="container login-container">
             <h2>Zaloguj się</h2>
+            <p id="login-info"><br></br></p>
             <form onSubmit={this.logIn}>
               <label htmlFor="login">Użytkownik: </label>
-              <input type="text" name="login" pattern="[PDL]\d{5}" required />
+              <input
+                type="text"
+                name="login"
+                pattern="[PDL]\d{5}"
+                placeholder="np. P12345, D12345, L12345"
+                required
+              />
               <label htmlFor="password">Hasło: </label>
-              <input type="password" name="password" required />
+              <input
+                type="password"
+                name="password"
+                placeholder="póki co dowolne"
+                required
+              />
               <input type="submit" value="Zaloguj" />
             </form>
             <p>Nie masz konta?</p>

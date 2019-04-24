@@ -15,8 +15,8 @@ class NewDocument extends Component {
     //console.log(e.target);
     e.preventDefault();
     const title = `${this.state.documentType}: ${
-      e.target.region.value ? e.target.region.value : ""
-    }  ${e.target.testDate.value}`;
+      e.target.region ? e.target.region.value : ""
+    }  ${e.target.testDate.value.split('T')[0]}`;
     console.log(title);
     fetch("https://medical-documentation.herokuapp.com/new-document", {
       method: "post",
@@ -24,8 +24,8 @@ class NewDocument extends Component {
       body: JSON.stringify({
         documentType: this.state.documentType,
         title,
-        testDate: e.target.testDate.value,
-        //testTime: e.target.testTime.value,
+        testDate: e.target.testDate.value.split('T').join(' '),
+        
         orderingDoctor: e.target.orderingDoctor.value,
         performingDoctor: e.target.performingDoctor.value,
         content: e.target.content.value
@@ -71,8 +71,8 @@ class NewDocument extends Component {
 
           {this.state.documentType && (
             <form className="document-form" onSubmit={this.createDocument}>
-              {(this.state.documentType == "Rezonans magnetyczny" ||
-                this.state.documentType == "Tomografia komputerowa") && (
+              {(this.state.documentType === "Rezonans magnetyczny" ||
+                this.state.documentType === "Tomografia komputerowa") && (
                 <label>
                   {" "}
                   Badany obszar: <input type="text" name="region" required />
@@ -91,10 +91,7 @@ class NewDocument extends Component {
                   required
                 />
               </label>
-              {/*   <label>
-                {" "}
-                Godzina badania: <input type="time" name="testTime" />
-              </label> */}
+            
 
               <label>
                 {" "}

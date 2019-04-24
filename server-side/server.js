@@ -5,15 +5,15 @@ const bodyParser = require("body-parser");
 const cors = require("cors");
 const router = express.Router();
 
+const baseID = 10000;
+
 let activeUser = {
-  accountType: "doctor", //z logowania
-  ID: "12121", //z logowania
-  name: "Adam Górski" //z bazy
+  accountType: "",
+  ID: "",
+  name: ""
 };
-let patientID = "11111";
-//let doctorID = "12312";
-//post do bazy danych po imię i nazwisko:
-let doctor = "Jan Kowalski";
+let patientID = "";
+
 const client = new MongoClient(
   "mongodb+srv://dokumenty-cyfrowe:kardiologia@dokumentycyfrowe-ck4e6.gcp.mongodb.net/test?retryWrites=true",
   { useNewUrlParser: true }
@@ -128,7 +128,6 @@ router.post("/new-document", async (req, res) => {
     documentType,
     title,
     testDate,
-    testTime,
     orderingDoctor,
     performingDoctor,
     content
@@ -137,7 +136,7 @@ router.post("/new-document", async (req, res) => {
     documentType,
     title,
     patientID, //from variable
-    testDate: `${testDate} ${testTime}`,
+    testDate,
     orderingDoctor,
     performingDoctor,
     describingDoctor: activeUser.name, //from variable
@@ -240,31 +239,106 @@ router.post("/lab-result", async (req, res) => {
 });
 
 //LOGOWANIE
-router.post("/", (req, res) => {
+router.post("/login", async (req, res) => {
   const { login, password } = req.body;
+  const db = client.db("DokumentyCyfrowe");
+  let collection;
+  let accountType;
 
-  //hashowanie hasła, sprawdzenie poprawności hasła i loginu
+  if (login[0] === "P") {
+    collection = db.collection("Pacjent");
+    accountType = "patient";
+  } else if (login[0] === "D") {
+    collection = db.collection("Lekarz");
+    accountType = "doctor";
+  } else {
+    collection = db.collection("Laborant");
+    accountType = "lab";
+  }
+  const user = await collection.findOne({ login });
+  if (user.password === password) {
+    activeUser = {
+      accountType,
+      name: `${user.name} ${user.surname}`,
+      ID: user.ID
+    };
+    if (accountType === "patient") {
+      patientID = user.ID;
+    }
 
-  //do testowania w Postmanie:
-  res.status(200).send(login);
+    res.status(200).send(activeUser);
+    return activeUser;
+  } else {
+    
+    res.status(400).json("FAIL");
+    //return "FAIL";
+  }
 });
 
 //REJESTRACJA
-router.post("/register", (req, res) => {
+router.post("/register", async (req, res) => {
+  const db = client.db("DokumentyCyfrowe");
   const accountType = req.body.accountType;
-  if (accountType == "doctor") {
+  if (accountType === "doctor") {
     const { name, surname, pesel, PWZ, specialization, password } = req.body;
-  } else {
-    //pacjent i laborant
+    const collection = db.collection("Lekarz");
+    const doctors = await collection.find({}).toArray();
+    const doctorCount = baseID + doctors.length;
+    const login = "D" + doctorCount;
+
+    newDoctor = {
+      name,
+      surname,
+      PESEL: pesel,
+      PWZ,
+      specialization,
+      password,
+      login
+    };
+    collection.insertOne(newDoctor);
+    res.status(200).send(newDoctor);
+  } else if (accountType === "patient") {
+    const { name, surname, sex, dob, pesel, password, address } = req.body;
+    const collection = db.collection("Pacjent");
+    const patients = await collection.find({}).toArray();
+    const patientCount = baseID + patients.length;
+    const login = "P" + patientCount;
+    const now = new Date();
+    const yearOfBirth = parseInt(dob.split("-")[0]);
+    const age = now.getFullYear() - yearOfBirth;
+    newPatient = {
+      name,
+      surname,
+      sex,
+      age,
+      PESEL: pesel,
+      dateOfBirth: dob,
+      address,
+      password,
+      login,
+      id: patientCount
+    };
+    collection.insertOne(newPatient);
+    res.status(200).send(newPatient);
+  } else if (accountType === "lab") {
     const { name, surname, dob, pesel, password } = req.body;
+    const collection = db.collection("Laborant");
+    const labs = await collection.find({}).toArray();
+    const labCount = baseID + labs.length;
+    const login = "L" + labCount;
+
+    newLab = {
+      name,
+      surname,
+      pesel,
+      dob,
+      password,
+      login
+    };
+    collection.insertOne(newLab);
+    res.status(200).send(newLab);
   }
-
-  //Generacja loginu (P12345, D12345, L12345), dodanie do Mongo
-
-  //test
-  res.status(200).send(accountType);
 });
-
 client.connect(() => {
   app.listen(process.env.PORT || 3000, () => {
     console.log(`Server started on port ${process.env.PORT}`);

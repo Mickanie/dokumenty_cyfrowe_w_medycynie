@@ -19,7 +19,7 @@ class NewAttachment extends Component {
           issueDate: date.value,
           startDate: startDate.value,
           type: "recepta",
-         // id: ""
+
         };
         break;
       case "sickleave":
@@ -31,7 +31,7 @@ class NewAttachment extends Component {
           startDate: startDate.value,
           endDate: endDate.value,
           type: "zwolnienie",
-         // id: ""
+
         };
         break;
 
@@ -45,13 +45,13 @@ class NewAttachment extends Component {
           diagnosis: diagnosis.value,
           aim: aim.value,
           type: "skierowanie",
-         // id: ""
+
         };
         break;
       case "lab-order":
         const checkboxes = [...e.target.test];
         const labTests = checkboxes
-          .filter(checkbox => checkbox.checked == true)
+          .filter(checkbox => checkbox.checked === true)
           .map(checkbox => checkbox.value);
 
         console.log(labTests);
@@ -59,8 +59,11 @@ class NewAttachment extends Component {
           title: `Zlecenie badań laboratoryjnych ${date.value}`,
           labTests: labTests,
           type: "zlecenie badań",
-          //id: ""
-        };
+
+          };
+         break;
+        default:
+        return;
     }
 
     await fetch("https://medical-documentation.herokuapp.com/attach-document", {

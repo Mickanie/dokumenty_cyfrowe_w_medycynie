@@ -11,8 +11,6 @@ class SideBar extends Component {
     fetch("https://medical-documentation.herokuapp.com/patient")
       .then(result => result.json())
       .then(data => this.setState({ patient: data }));
-
- 
   }
 
   render() {

@@ -75,6 +75,10 @@ input[type="submit"]:hover {
   border-radius: 10px;
 }
 
+.login-container #login-info {
+  margin: 5px 0 0 0;
+}
+
 .login-container form {
   display: flex;
   flex-direction: column;
