@@ -15,10 +15,10 @@ class Document extends Component {
 
   render() {
     if (this.state.documents.length) {
-      // console.log(this.state.documents);
+      
       let currentDocument;
       this.state.documents.forEach(document => {
-        console.log(document);
+        
         if (document._id === this.props.match.params.documentId) {
           currentDocument = document;
         }
@@ -27,16 +27,21 @@ class Document extends Component {
       console.log(currentDocument);
       return (
         <div className="container document-container">
-          <Link
-            to="/documentation"
-            className="backButton"
-
-          >
+          <Link to="/documentation" className="backButton">
             <button>Powrót</button>
           </Link>
           <p style={{ fontWeight: "700" }}>{currentDocument.title}</p>
           {!currentDocument.title.includes("Badanie krwi") && (
-            <p>{currentDocument.content}</p>
+            <div style={{ textAlign: "left", width: "30%", margin: "0 auto" }}>
+              <p>Data: {currentDocument.date}</p>
+              <p>Lekarz zlecający: {currentDocument.orderingDoctor}</p>
+              <p>Lekarz wykonujący: {currentDocument.performingDoctor}</p>
+              <p>Lekarz opisujący: {currentDocument.describingDoctor}</p>
+              <p>
+                <br />
+                {currentDocument.content}
+              </p>
+            </div>
           )}
           {currentDocument.title.includes("Badanie krwi") && (
             <div className="table">
@@ -66,7 +71,7 @@ class Document extends Component {
               </table>
             </div>
           )}
-          <button>Zapisz do PDF</button>
+          <button onClick={() => this.saveToPDF(parametr)}>Zapisz do PDF</button>
         </div>
       );
     }
