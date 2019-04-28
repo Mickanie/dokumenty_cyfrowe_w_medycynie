@@ -5,7 +5,7 @@ import MedicalProcess from "../MedicalProcess";
 import Documentation from "../Documentation";
 import NewDocument from "./NewDocument";
 import Document from "../Document";
-
+import Report from "../Report";
 import SideBar from "../SideBar";
 import "../../css/PatientDoctorPage.css";
 import NewRecommendation from "./NewRecommendation";
@@ -147,7 +147,6 @@ class DoctorPage extends Component {
       await fetch("https://medical-documentation.herokuapp.com/medical-process")
         .then(result => result.json())
         .then(data => {
-          console.log(data);
           this.setState({ tasks: data });
         });
     } else {
@@ -209,7 +208,6 @@ class DoctorPage extends Component {
                     <NewAttachment {...props} documentType="prescription" />
                   )}
                 />
-
                 <Route
                   exact
                   path="/recommendations/create-new/generate-sickleave"
@@ -217,7 +215,6 @@ class DoctorPage extends Component {
                     <NewAttachment {...props} documentType="sickleave" />
                   )}
                 />
-
                 <Route
                   exact
                   path="/recommendations/create-new/generate-referral"
@@ -225,7 +222,6 @@ class DoctorPage extends Component {
                     <NewAttachment {...props} documentType="referral" />
                   )}
                 />
-
                 <Route
                   exact
                   path="/recommendations/create-new/generate-lab-order"
@@ -243,13 +239,13 @@ class DoctorPage extends Component {
                   path="/recommendations/create-new"
                   component={NewRecommendation}
                 />
-
                 <Route
                   exact
                   path="/documentation/create-new"
                   component={NewDocument}
                 />
-
+                <Route exact path="/documentation/report" component={Report} />}
+                />
                 <Route
                   path="/documentation"
                   render={props => (
@@ -275,7 +271,6 @@ class DoctorPage extends Component {
                     />
                   )}
                 />
-
                 <Redirect from="/" to="/documentation" />
               </Switch>
             </HashRouter>

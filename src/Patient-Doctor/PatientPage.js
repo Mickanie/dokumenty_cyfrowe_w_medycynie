@@ -6,6 +6,7 @@ import Documentation from "./Documentation";
 import Recommendations from "./Recommendations";
 import SideBar from "./SideBar";
 import "../css/PatientDoctorPage.css";
+import Report from "./Report";
 
 class PatientPage extends Component {
   state = {
@@ -86,12 +87,12 @@ class PatientPage extends Component {
                 />
               )}
             />
+            <Route exact path="/documentation/report" component={Report} />}
             <Route
               exact
               path="/documentation/document:documentId"
               component={Document}
             />
-
             <Redirect from="/" to="/documentation" />
           </Switch>
         </HashRouter>
