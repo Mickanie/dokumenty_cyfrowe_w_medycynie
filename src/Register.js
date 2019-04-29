@@ -73,7 +73,7 @@ class Register extends Component {
   };
   render() {
     return (
-      <div className="container register-container">
+      <div className="register-container">
         <h2>Zarejestruj się</h2>
         <button className="backButton" onClick={this.goBack}>
           Powrót do logowania

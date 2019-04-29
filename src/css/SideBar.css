@@ -8,6 +8,14 @@
   padding: 15px 20px;
 }
 
+@media screen and (max-width: 470px) {
+  .side-bar {
+    width: 100%;
+    height: auto;
+    position: static;
+  }
+}
+
 .side-bar h3 {
   margin: 10px 0 10px 0;
 }

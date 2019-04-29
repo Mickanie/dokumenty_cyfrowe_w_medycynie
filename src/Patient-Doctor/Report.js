@@ -74,13 +74,15 @@ class Raport extends Component {
           </label>
           {this.state.filteredResults.length > 0 && (
             <div>
-              <table>
+              <table border="1">
                 <thead>
                   <tr>
                     <th>Data</th>
                     <th>Wartość {this.state.chosenParameter}</th>
                     <th>Zakres</th>
                     <th>Jednostka</th>
+                    <th>Lekarz zlecający</th>
+                    <th>Laborant</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -91,6 +93,9 @@ class Raport extends Component {
                         <td>{ result.results.find(item => item.name === this.state.chosenParameter).value }</td>
                         <td>{ result.results.find(item => item.name === this.state.chosenParameter).range }</td>
                         <td>{ result.results.find(item => item.name === this.state.chosenParameter).unit }</td>
+                        <td>{ result.orderingDoctor }</td>
+                        <td>{ result.labTechnician }</td>
+
                       </tr>
                     );
                   })}

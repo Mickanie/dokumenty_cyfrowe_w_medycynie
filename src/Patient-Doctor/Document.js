@@ -66,7 +66,7 @@ class Document extends Component {
               <p>Lekarz zlecający: {currentDocument.orderingDoctor}</p>
               <p>Laborant: {currentDocument.labTechnician}</p>
             </div>
-              <table>
+              <table border="1">
                 <thead>
                   <tr>
                     <th>Lp</th>

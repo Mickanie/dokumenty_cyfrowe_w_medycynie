@@ -4,25 +4,22 @@
   margin: 10px auto !important;
   height: 75vh;
   overflow: auto;
-  
+
   form {
     display: flex;
     flex-direction: column;
     align-items: flex-end;
-   
+
     width: 60%;
     margin: 0 auto;
 
-   
     .mainLabel {
-      
       margin-right: 150px;
-      
 
-      input[type="text"], input[type="datetime-local"] {
+      input[type="text"],
+      input[type="datetime-local"] {
         width: 150px;
         margin-top: 4px;
-       
       }
       select {
         width: 162px;
@@ -31,33 +28,33 @@
     }
 
     .inner-from {
-     
       label {
-        
-        input[type="text"], select {
+        input[type="text"],
+        select {
           width: 150px;
           margin-top: 4px;
-         
         }
       }
-       
-      }
     }
   }
+}
 
-  .table {
-    width: 90%;
+.table {
+  width: 90%;
 
-    margin: 0 auto;
+  margin: 0 auto;
 
-    table {
-      width: 70%;
-      text-align: left;
-      margin: auto;
+  table {
+    width: 70%;
+    text-align: left;
+    margin: auto;
+    border-collapse: collapse;
+    border: 2px solid black;
 
-      td {
-        margin: 10px;
-      }
+    td, th {
+      margin: 10px;
+      padding: 5px;
+      text-align: center;
     }
   }
-
+}

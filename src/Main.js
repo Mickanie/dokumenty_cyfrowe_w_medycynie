@@ -70,7 +70,7 @@ class Main extends Component {
     return (
       <div>
         {this.state.isLoggedIn === "false" ? (
-          <div className="container login-container">
+          <div className="login-container">
             <h2>Zaloguj się</h2>
             <p id="login-info">{infoText}</p>
             <form onSubmit={this.logIn}>
@@ -92,6 +92,7 @@ class Main extends Component {
             </Link>
           </div>
         ) : (
+          <div>
           <div className="header">
             <div className="radio-buttons">
               <label>
@@ -132,7 +133,10 @@ class Main extends Component {
             <button className="log-out" onClick={this.logOut}>
               Wyloguj się
             </button>
-
+          </div>
+        
+          
+        
             {this.state.activeAccount === "patient" ? (
               <PatientPage />
             ) : this.state.activeAccount === "doctor" ? (
@@ -140,8 +144,9 @@ class Main extends Component {
             ) : (
               <LabTechnicianPage />
             )}
-          </div>
-        )}
+            </div>
+
+            )}
       </div>
     );
   }

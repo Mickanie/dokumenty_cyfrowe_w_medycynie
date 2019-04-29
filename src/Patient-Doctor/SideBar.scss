@@ -1,4 +1,5 @@
 $header-height: 90px;
+$mobile-breakpoint: 470px;
 
 .side-bar {
   position: absolute;
@@ -8,6 +9,12 @@ $header-height: 90px;
   height: 100vh;
   background: rgb(201, 201, 201);
   padding: 15px 20px;
+
+  @media screen and (max-width: $mobile-breakpoint) {
+    width: 100%;
+    height: auto;
+    position: static;
+  }
 
   h3 {
     margin: 10px 0 10px 0;

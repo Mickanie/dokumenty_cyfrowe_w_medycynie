@@ -1,40 +1,69 @@
+@import "_config";
+
+
 .documentation-container {
+  @include mobile {
+    margin-top: 15px;
+  }
   button {
-        margin: 30px 40px;
-        
-    } 
+    margin: 30px 40px;
 
-    .buttons {
-        display: flex;
-        justify-content: center;
+    @include mobile {
+      width: 300px;
+      display: block;
+      margin: 20px auto;
     }
-    .documents {
-        height: 41vh;
-        text-align: left;
-        overflow-y: auto;
+  }
+
+  .buttons {
+    display: flex;
+    justify-content: center;
+
+    @include mobile {
+      flex-direction: column;
     }
-    
-    .filterForm {
-        margin: 20px 0 0 20px;
-        display: flex;
-        justify-content: flex-start;
-        width: 100%;
-        flex-wrap: nowrap;
-    
-        input, select {
-            margin:  0 10px;
-            width: 120px;
+  }
+  .documents {
+    height: 41vh;
+    text-align: left;
+    overflow-y: auto;
+  }
+
+  .filterForm {
+    margin: 20px 0 0 20px;
+    display: flex;
+    justify-content: flex-start;
+    width: 100%;
+    flex-wrap: nowrap;
+
+    @include mobile {
+      flex-direction: column;
+      width: 90%;
+
+      #dateFilter {
+        display: grid;
+        span {
+          display: inline-block;
+
+          input {
+            width: 100px;
+          }
         }
-        
+      }
     }
 
-    ul {
-
-        margin-top: 40px;
-        padding-left: 0;
-        li {
-            margin: 20px;
-        }
+    input,
+    select {
+      margin: 0 10px;
+      width: 120px;
     }
+  }
 
+  ul {
+    margin-top: 40px;
+    padding-left: 0;
+    li {
+      margin: 20px;
+    }
+  }
 }

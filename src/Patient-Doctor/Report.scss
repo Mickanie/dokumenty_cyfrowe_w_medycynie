@@ -1,13 +1,15 @@
 .raport-content {
-  width: 60%;
+  width: 90%;
   margin: auto;
   text-align: center;
 
   table {
+    border-collapse: collapse;
+    border: 2px solid black;
     td {
-      padding: 10px;
+      padding: 10px 7px;
 
-      width: 200px;
+      width: 250px;
       text-align: center;
     }
   }

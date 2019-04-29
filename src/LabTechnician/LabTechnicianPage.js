@@ -24,8 +24,10 @@ class LabTechnicianPage extends Component {
     e.preventDefault();
     let name = document.querySelector("#parameter").value;
     let value = document.querySelector("#result").value;
-    let range = this.state.parameters.find(parameter => parameter.name === name).range;
-    let unit = this.state.parameters.find(parameter => parameter.name === name).unit;
+    let range = this.state.parameters.find(parameter => parameter.name === name)
+      .range;
+    let unit = this.state.parameters.find(parameter => parameter.name === name)
+      .unit;
     if (value) {
       const newParameter = {
         name,
@@ -62,10 +64,7 @@ class LabTechnicianPage extends Component {
     window.location.reload();
   };
 
-
-
   render() {
-   
     return (
       <div className="container lab-container">
         <h2>Dodaj wynik badania krwi</h2>
@@ -166,10 +165,10 @@ class LabTechnicianPage extends Component {
 
               {this.state.results.length > 0 && (
                 <div className="table">
-                  <table>
+                  <table border="1">
                     <thead>
                       <tr>
-                        <th>Lp</th>
+                        <th>Lp.</th>
                         <th>Parametr</th>
                         <th>Wartość</th>
                         <th>Zakres</th>

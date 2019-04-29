@@ -18,7 +18,8 @@
   margin-right: 150px;
 }
 
-.lab-container form .mainLabel input[type="text"], .lab-container form .mainLabel input[type="datetime-local"] {
+.lab-container form .mainLabel input[type="text"],
+.lab-container form .mainLabel input[type="datetime-local"] {
   width: 150px;
   margin-top: 4px;
 }
@@ -28,7 +29,8 @@
   margin-top: 4px;
 }
 
-.lab-container form .inner-from label input[type="text"], .lab-container form .inner-from label select {
+.lab-container form .inner-from label input[type="text"],
+.lab-container form .inner-from label select {
   width: 150px;
   margin-top: 4px;
 }
@@ -42,8 +44,12 @@
   width: 70%;
   text-align: left;
   margin: auto;
+  border-collapse: collapse;
+  border: 2px solid black;
 }
 
-.table table td {
+.table table td, .table table th {
   margin: 10px;
+  padding: 5px;
+  text-align: center;
 }

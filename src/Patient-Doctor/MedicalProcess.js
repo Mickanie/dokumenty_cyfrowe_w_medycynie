@@ -35,7 +35,8 @@ class MedicalProcess extends Component {
               <option value="done">Wykonane</option>
               <option value="todo">Do zrobienia</option>
             </select>
-            Data: <input type="datetime-local" name="date" />
+            <p>Data:</p>
+            <input type="datetime-local" name="date" placeholder="date" />
             <textarea placeholder="Szczegóły" name="details" />
             <input type="submit" value="Dodaj zadanie" />
           </form>
@@ -90,7 +91,7 @@ class MedicalProcess extends Component {
                     ) : (
                       task.details
                     )}
-                    <span style={{ float: "right" }}>
+                    <span className="dateSpan">
                       {this.state.editMode.includes(task._id) ? (
                         <input
                           type="text"
@@ -147,7 +148,7 @@ class MedicalProcess extends Component {
                     ) : (
                       task.details
                     )}
-                    <span style={{ float: "right" }}>
+                    <span className="dateSpan">
                       {this.state.editMode.includes(task._id) ? (
                         <input
                           type="text"
