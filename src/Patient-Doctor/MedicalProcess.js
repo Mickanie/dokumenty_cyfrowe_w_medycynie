@@ -80,30 +80,32 @@ class MedicalProcess extends Component {
                     </button>
 
                     <br />
-                    {this.state.editMode.includes(task._id) ? (
-                      <input
-                        type="text"
-                        name="details"
-                        id="details"
-                        defaultValue={task.details}
-                        placeholder="Szczegóły"
-                      />
-                    ) : (
-                      task.details
-                    )}
-                    <span className="dateSpan">
+                    <div className="task-info">
                       {this.state.editMode.includes(task._id) ? (
                         <input
                           type="text"
-                          name="date"
-                          id="date"
-                          defaultValue={task.date}
-                          placeholder="Data"
+                          name="details"
+                          id="details"
+                          defaultValue={task.details}
+                          placeholder="Szczegóły"
                         />
                       ) : (
-                        task.date
+                        <p>{task.details}</p>
                       )}
-                    </span>
+                  
+                        {this.state.editMode.includes(task._id) ? (
+                          <input
+                            type="text"
+                            name="date"
+                            id="date"
+                            defaultValue={task.date}
+                            placeholder="Data"
+                          />
+                        ) : (
+                          <p>{task.date}</p>
+                        )}
+           
+                    </div>
                   </li>
                 );
               })}
@@ -137,30 +139,32 @@ class MedicalProcess extends Component {
                     </button>
 
                     <br />
-                    {this.state.editMode.includes(task._id) ? (
-                      <input
-                        type="text"
-                        name="details"
-                        id="details"
-                        defaultValue={task.details}
-                        placeholder="Szczegóły"
-                      />
-                    ) : (
-                      task.details
-                    )}
-                    <span className="dateSpan">
+                    <div className="task-info">
                       {this.state.editMode.includes(task._id) ? (
                         <input
                           type="text"
-                          name="date"
-                          id="date"
-                          defaultValue={task.date}
-                          placeholder="Data"
+                          name="details"
+                          id="details"
+                          defaultValue={task.details}
+                          placeholder="Szczegóły"
                         />
                       ) : (
-                        task.date
+                        <p>{task.details}</p>
                       )}
-                    </span>
+                  
+                        {this.state.editMode.includes(task._id) ? (
+                          <input
+                            type="text"
+                            name="date"
+                            id="date"
+                            defaultValue={task.date}
+                            placeholder="Data"
+                          />
+                        ) : (
+                          <p>{task.date}</p>
+                        )}
+           
+                    </div>
                   </li>
                 );
               })}

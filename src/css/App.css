@@ -2,7 +2,7 @@ body {
   font-size: 0.9em;
 }
 
-.header {
+header {
   background: #929292;
   height: 90px;
   width: 100%;
@@ -10,22 +10,22 @@ body {
 }
 
 @media screen and (max-width: 470px) {
-  .header {
+  header {
     height: 130px;
   }
 }
 
-.header .radio-buttons {
+header .radio-buttons {
   padding: 25px;
 }
 
 @media screen and (max-width: 470px) {
-  .header .radio-buttons {
+  header .radio-buttons {
     display: none;
   }
 }
 
-.header .log-out {
+header .log-out {
   position: absolute;
   top: 12px;
   right: 10px;
@@ -33,7 +33,7 @@ body {
 }
 
 @media screen and (max-width: 470px) {
-  .header .log-out {
+  header .log-out {
     right: 6%;
   }
 }
@@ -184,11 +184,22 @@ input[type="submit"]:hover {
   height: 40px;
 }
 
+.register-container form span input[type="date"] {
+  margin-top: -2px;
+}
+
 .register-container form span input,
 .register-container form span select {
   float: right;
   width: 200px;
   margin-top: 0;
+}
+
+@media screen and (max-width: 470px) {
+  .register-container form span input,
+  .register-container form span select {
+    margin-right: 10px;
+  }
 }
 
 .register-container form span select {

@@ -5,9 +5,9 @@ import "../../css/NewRecommendation.css";
 
 class NewRecommendation extends Component {
   state = {
-    dataSaved: JSON.parse(localStorage.getItem("saved")),
-    data: JSON.parse(localStorage.getItem("recommendationData")) || {},
-    attachments: JSON.parse(localStorage.getItem("attachments")) || []
+    dataSaved: JSON.parse(sessionStorage.getItem("saved")),
+    data: JSON.parse(sessionStorage.getItem("recommendationData")) || {},
+    attachments: JSON.parse(sessionStorage.getItem("attachments")) || []
   };
 
   toggleSave = async e => {
@@ -31,11 +31,11 @@ class NewRecommendation extends Component {
         }
       });
     }
-    await localStorage.setItem(
+    await sessionStorage.setItem(
       "recommendationData",
       JSON.stringify(this.state.data)
     );
-    await localStorage.setItem("saved", JSON.stringify(this.state.dataSaved));
+    await sessionStorage.setItem("saved", JSON.stringify(this.state.dataSaved));
   };
 
   submitRecommendation = () => {
@@ -48,9 +48,9 @@ class NewRecommendation extends Component {
         attachments: this.state.attachments
       })
     });
-    localStorage.removeItem("saved");
-    localStorage.removeItem("recommendationData");
-    localStorage.removeItem("attachments");
+    sessionStorage.removeItem("saved");
+    sessionStorage.removeItem("recommendationData");
+    sessionStorage.removeItem("attachments");
     this.props.history.push("/recommendations");
   };
 

@@ -3,7 +3,7 @@
 body {
   font-size: 0.9em;
 }
-.header {
+header {
   background: $second-color;
   height: $header-height;
   width: 100%;
@@ -92,15 +92,13 @@ input[type="submit"] {
   position: relative;
 
   @include mobile {
-   
-      width: 100vw;
-      height: 100vh;
-      border-radius: 0;
-      margin: 0;
-      box-shadow: none;
-      padding: 5px;
-    }
-  
+    width: 100vw;
+    height: 100vh;
+    border-radius: 0;
+    margin: 0;
+    box-shadow: none;
+    padding: 5px;
+  }
 
   @include mobile {
     padding: 0;
@@ -136,17 +134,14 @@ input[type="submit"] {
   box-shadow: 5px 5px 5px rgb(88, 88, 88);
   position: relative;
 
-
   @include mobile {
-
     width: 100vw;
     height: 100vh;
     border-radius: 0;
     margin: 0;
     box-shadow: none;
- 
-    padding: 50px 5px 5px 5px;
 
+    padding: 50px 5px 5px 5px;
   }
 
   p,
@@ -167,11 +162,20 @@ input[type="submit"] {
       padding: 7px;
       height: 40px;
 
+      input[type="date"] {
+        margin-top: -2px;
+      }
+
       input,
       select {
         float: right;
         width: 200px;
         margin-top: 0;
+
+        @include mobile {
+          margin-right: 10px;
+        
+        }
       }
 
       select {

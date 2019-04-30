@@ -47,7 +47,7 @@ class Register extends Component {
         .then(data => {
           this.setState({ generatedLogin: data.login });
         });
-      await localStorage.setItem("generatedLogin", this.state.generatedLogin);
+      await sessionStorage.setItem("generatedLogin", this.state.generatedLogin);
     } else {
       await fetch("https://medical-documentation.herokuapp.com/register", {
         method: "post",
@@ -67,7 +67,7 @@ class Register extends Component {
         .then(data => {
           this.setState({ generatedLogin: data.login });
         });
-      await localStorage.setItem("generatedLogin", this.state.generatedLogin);
+      await sessionStorage.setItem("generatedLogin", this.state.generatedLogin);
     }
     this.props.history.push("/");
   };

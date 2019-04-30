@@ -24,8 +24,7 @@
     @include mobile {
       padding: 15px;
     }
-    }
-  
+  }
 
   form {
     display: flex;
@@ -48,9 +47,8 @@
       flex: 2 1 250px;
       @include mobile {
         width: 80%;
-        margin-top:5px;
+        margin-top: 5px;
       }
-      
     }
 
     textarea {
@@ -59,8 +57,7 @@
       flex: 2 1 300px;
       @include mobile {
         width: 80%;
-        margin:5px auto 10px auto;
-        
+        margin: 5px auto 10px auto;
       }
     }
   }
@@ -71,20 +68,22 @@
 
     li {
       margin-bottom: 30px;
-      
 
+      .task-info {
+        display: flex;
+        justify-content: space-between;
+        p {
+          margin: 5px 0;
+        }
+
+        @include mobile {
+          flex-direction: column;
+        }
+      }
       input {
         margin: 0;
       }
 
-      .dateSpan {
-        float: right;
-
-        @include mobile  {
-          float: left;
-          margin: 5px 0 0 0;
-        }
-      }
       #title {
         width: 300px;
       }

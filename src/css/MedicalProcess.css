@@ -82,19 +82,23 @@
   margin-bottom: 30px;
 }
 
-.medical-process-container ul li input {
-  margin: 0;
+.medical-process-container ul li .task-info {
+  display: flex;
+  justify-content: space-between;
 }
 
-.medical-process-container ul li .dateSpan {
-  float: right;
+.medical-process-container ul li .task-info p {
+  margin: 5px 0;
 }
 
 @media screen and (max-width: 470px) {
-  .medical-process-container ul li .dateSpan {
-    float: left;
-    margin: 5px 0 0 0;
+  .medical-process-container ul li .task-info {
+    flex-direction: column;
   }
+}
+
+.medical-process-container ul li input {
+  margin: 0;
 }
 
 .medical-process-container ul li #title {

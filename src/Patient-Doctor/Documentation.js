@@ -103,11 +103,14 @@ class Documentation extends Component {
             </select>
           </label>
           <label id="dateFilter">
-            Filtruj po dacie:{" "}
-            <span>
-              od <input type="date" name="fromDate" /> do{" "}
-            </span>
-            <input type="date" name="toDate" />
+            <p>Filtruj po dacie: </p>
+
+            <p>
+              {" "}
+              od
+              <input type="date" name="fromDate" /> do
+              <input type="date" name="toDate" />
+            </p>
           </label>
           <input type="submit" value="Filtruj" />
         </form>
