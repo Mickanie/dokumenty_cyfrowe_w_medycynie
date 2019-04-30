@@ -85,7 +85,7 @@
     margin: 10px 0;
   }
   .documentation-container .filterForm #dateFilter p input {
-    width: 125px;
+    width: 37%;
   }
   .documentation-container .filterForm input,
   .documentation-container .filterForm select {

@@ -99,7 +99,7 @@ class LabTechnicianPage extends Component {
           </label>
 
           {this.state.resultType && (
-            <div>
+            <div className="result-display">
               <div className="inner-form">
                 <label>
                   Wybierz parametr
@@ -168,7 +168,7 @@ class LabTechnicianPage extends Component {
                   <table border="1">
                     <thead>
                       <tr>
-                        <th>Lp.</th>
+                        <th className="mobile-out">Lp.</th>
                         <th>Parametr</th>
                         <th>Wartość</th>
                         <th>Zakres</th>
@@ -179,7 +179,7 @@ class LabTechnicianPage extends Component {
                       return (
                         <tbody key={i}>
                           <tr>
-                            <td>{i + 1}</td>
+                            <td className="mobile-out">{i + 1}</td>
                             <td>{this.state.results[i].name}</td>
                             <td>{this.state.results[i].value}</td>
                             <td>{this.state.results[i].range}</td>

@@ -49,37 +49,38 @@ class MedicalProcess extends Component {
               .map((task, i) => {
                 return (
                   <li key={i}>
-                    <strong>
-                      {this.state.editMode.includes(task._id) ? (
-                        <input
-                          type="text"
-                          name="title"
-                          id="title"
-                          defaultValue={task.title}
-                        />
-                      ) : (
-                        task.title
+                    <span className="task-header">
+                      <strong>
+                        {this.state.editMode.includes(task._id) ? (
+                          <input
+                            type="text"
+                            name="title"
+                            id="title"
+                            defaultValue={task.title}
+                          />
+                        ) : (
+                          task.title
+                        )}
+                      </strong>
+                      {this.props.activeAccount === "doctor" && (
+                        <button
+                          className="set-done"
+                          id={task._id}
+                          onClick={this.props.setCompleted}
+                        >
+                          ✓
+                        </button>
                       )}
-                    </strong>
-                    {this.props.activeAccount === "doctor" && (
+
                       <button
-                        className="set-done"
+                        className="edit"
+                        onClick={this.editMode}
                         id={task._id}
-                        onClick={this.props.setCompleted}
                       >
-                        ✓
+                        🖉
                       </button>
-                    )}
+                    </span>
 
-                    <button
-                      className="edit"
-                      onClick={this.editMode}
-                      id={task._id}
-                    >
-                      🖉
-                    </button>
-
-                    <br />
                     <div className="task-info">
                       {this.state.editMode.includes(task._id) ? (
                         <input
@@ -92,19 +93,18 @@ class MedicalProcess extends Component {
                       ) : (
                         <p>{task.details}</p>
                       )}
-                  
-                        {this.state.editMode.includes(task._id) ? (
-                          <input
-                            type="text"
-                            name="date"
-                            id="date"
-                            defaultValue={task.date}
-                            placeholder="Data"
-                          />
-                        ) : (
-                          <p>{task.date}</p>
-                        )}
-           
+
+                      {this.state.editMode.includes(task._id) ? (
+                        <input
+                          type="text"
+                          name="date"
+                          id="date"
+                          defaultValue={task.date}
+                          placeholder="Data"
+                        />
+                      ) : (
+                        <p>{task.date}</p>
+                      )}
                     </div>
                   </li>
                 );
@@ -118,27 +118,28 @@ class MedicalProcess extends Component {
               .map((task, i) => {
                 return (
                   <li key={i}>
-                    <strong>
-                      {this.state.editMode.includes(task._id) ? (
-                        <input
-                          type="text"
-                          name="title"
-                          id="title"
-                          defaultValue={task.title}
-                        />
-                      ) : (
-                        task.title
-                      )}
-                    </strong>
-                    <button
-                      className="edit"
-                      onClick={this.editMode}
-                      id={task._id}
-                    >
-                      🖉
-                    </button>
+                    <span className="task-header">
+                      <strong>
+                        {this.state.editMode.includes(task._id) ? (
+                          <input
+                            type="text"
+                            name="title"
+                            id="title"
+                            defaultValue={task.title}
+                          />
+                        ) : (
+                          task.title
+                        )}
+                      </strong>
+                      <button
+                        className="edit"
+                        onClick={this.editMode}
+                        id={task._id}
+                      >
+                        🖉
+                      </button>
+                    </span>
 
-                    <br />
                     <div className="task-info">
                       {this.state.editMode.includes(task._id) ? (
                         <input
@@ -151,19 +152,18 @@ class MedicalProcess extends Component {
                       ) : (
                         <p>{task.details}</p>
                       )}
-                  
-                        {this.state.editMode.includes(task._id) ? (
-                          <input
-                            type="text"
-                            name="date"
-                            id="date"
-                            defaultValue={task.date}
-                            placeholder="Data"
-                          />
-                        ) : (
-                          <p>{task.date}</p>
-                        )}
-           
+
+                      {this.state.editMode.includes(task._id) ? (
+                        <input
+                          type="text"
+                          name="date"
+                          id="date"
+                          defaultValue={task.date}
+                          placeholder="Data"
+                        />
+                      ) : (
+                        <p>{task.date}</p>
+                      )}
                     </div>
                   </li>
                 );

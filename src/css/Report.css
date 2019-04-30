@@ -1,15 +1,25 @@
-.raport-content {
-  width: 90%;
+.report-content {
+  width: 70%;
   margin: auto;
   text-align: center;
 }
 
-.raport-content table {
+@media screen and (max-width: 470px) {
+  .report-content {
+    width: 95%;
+  }
+}
+
+.report-content select {
+  margin-bottom: 0;
+}
+
+.report-content table {
   border-collapse: collapse;
   border: 2px solid black;
 }
 
-.raport-content table td {
+.report-content table td {
   padding: 10px 7px;
   width: 250px;
   text-align: center;

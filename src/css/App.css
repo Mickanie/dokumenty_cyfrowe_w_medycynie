@@ -152,6 +152,13 @@ input[type="submit"]:hover {
 }
 
 @media screen and (max-width: 470px) {
+  .register-container .backButton {
+    margin-top: 5px;
+    right: 6%;
+  }
+}
+
+@media screen and (max-width: 470px) {
   .register-container {
     width: 100vw;
     height: 100vh;
@@ -203,7 +210,13 @@ input[type="submit"]:hover {
 }
 
 .register-container form span select {
-  width: 200px;
+  width: 210px;
+}
+
+@media screen and (max-width: 470px) {
+  .register-container form span select {
+    width: 200px;
+  }
 }
 
 .register-container .content {
@@ -222,7 +235,8 @@ input[type="submit"]:hover {
   }
   .container {
     width: 100vw;
-    height: 100vh;
+    min-height: 100vh;
+    height: 100%;
     border-radius: 0;
     margin: 15px 0 0 0;
     box-shadow: none;
@@ -231,10 +245,11 @@ input[type="submit"]:hover {
   button,
   input[type="submit"] {
     width: 300px;
+    display: block;
   }
   .backButton {
-    left: 0 !important;
-    width: 200px;
-    margin: auto 23%;
+    width: 300px;
+    display: block;
+    margin: 10px auto;
   }
 }

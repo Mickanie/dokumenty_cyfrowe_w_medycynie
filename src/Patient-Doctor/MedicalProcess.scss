@@ -23,6 +23,8 @@
 
     @include mobile {
       padding: 15px;
+      overflow-y: visible;
+      height: auto;
     }
   }
 
@@ -68,6 +70,10 @@
 
     li {
       margin-bottom: 30px;
+
+      .task-header {
+        display: flex;
+      }
 
       .task-info {
         display: flex;

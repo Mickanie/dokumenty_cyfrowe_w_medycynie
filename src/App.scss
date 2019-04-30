@@ -25,7 +25,7 @@ header {
     top: 12px;
     right: 10px;
     margin: 15px;
-    @media screen and (max-width: $mobile-breakpoint) {
+    @include mobile {
       right: 6%;
     }
   }
@@ -134,6 +134,13 @@ input[type="submit"] {
   box-shadow: 5px 5px 5px rgb(88, 88, 88);
   position: relative;
 
+  .backButton {
+    @include mobile {
+      margin-top: 5px;
+      right: 6%;
+    }
+  }
+
   @include mobile {
     width: 100vw;
     height: 100vh;
@@ -174,12 +181,14 @@ input[type="submit"] {
 
         @include mobile {
           margin-right: 10px;
-        
         }
       }
 
       select {
-        width: 200px;
+        width: 210px;
+        @include mobile {
+          width: 200px;
+        }
       }
     }
   }
@@ -200,7 +209,8 @@ input[type="submit"] {
   }
   .container {
     width: 100vw;
-    height: 100vh;
+    min-height: 100vh;
+    height: 100%;
     border-radius: 0;
     margin: 15px 0 0 0;
     box-shadow: none;
@@ -210,11 +220,12 @@ input[type="submit"] {
   button,
   input[type="submit"] {
     width: 300px;
+    display: block;
   }
 
   .backButton {
-    left: 0 !important;
-    width: 200px;
-    margin: auto 23%;
+    width: 300px;
+    display: block;
+    margin: 10px auto;
   }
 }

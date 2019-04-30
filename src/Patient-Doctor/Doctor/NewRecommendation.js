@@ -106,20 +106,22 @@ class NewRecommendation extends Component {
             })}
           </p>
         )}
-        <p>
+        <p className="attachments-choice">
           Wygeneruj załącznik:{" "}
-          <Link to="/recommendations/create-new/generate-prescription">
-            <button className="attachment-button">Recepta</button>
-          </Link>
-          <Link to="/recommendations/create-new/generate-sickleave">
-            <button className="attachment-button">Zwolnienie</button>
-          </Link>
-          <Link to="/recommendations/create-new/generate-referral">
-            <button className="attachment-button">Skierowanie</button>
-          </Link>
-          <Link to="/recommendations/create-new/generate-lab-order">
-            <button className="attachment-button">Zlecenie badania</button>
-          </Link>
+          <div className="attachment-links">
+            <Link to="/recommendations/create-new/generate-prescription">
+              <button className="attachment-button">Recepta</button>
+            </Link>
+            <Link to="/recommendations/create-new/generate-sickleave">
+              <button className="attachment-button">Zwolnienie</button>
+            </Link>
+            <Link to="/recommendations/create-new/generate-referral">
+              <button className="attachment-button">Skierowanie</button>
+            </Link>
+            <Link to="/recommendations/create-new/generate-lab-order">
+              <button className="attachment-button">Zlecenie badania</button>
+            </Link>
+          </div>
         </p>
         <button className="submit-button" onClick={this.submitRecommendation}>
           Dodaj zalecenie

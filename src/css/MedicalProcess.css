@@ -24,6 +24,8 @@
 @media screen and (max-width: 470px) {
   .medical-process-container .content {
     padding: 15px;
+    overflow-y: visible;
+    height: auto;
   }
 }
 
@@ -80,6 +82,10 @@
 
 .medical-process-container ul li {
   margin-bottom: 30px;
+}
+
+.medical-process-container ul li .task-header {
+  display: flex;
 }
 
 .medical-process-container ul li .task-info {

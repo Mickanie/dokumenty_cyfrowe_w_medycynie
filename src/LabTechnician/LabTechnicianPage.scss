@@ -1,9 +1,16 @@
+@import "_config";
+
 .lab-container {
   text-align: center;
   width: 70%;
-  margin: 10px auto !important;
+  margin: 10px auto;
   height: 75vh;
   overflow: auto;
+
+  @include mobile {
+    width: 100%;
+    margin: 0;
+  }
 
   form {
     display: flex;
@@ -13,8 +20,17 @@
     width: 60%;
     margin: 0 auto;
 
+    @include mobile {
+      width: 100%;
+    }
+
     .mainLabel {
       margin-right: 150px;
+
+      @include mobile {
+        margin: 0;
+        width: 100%;
+      }
 
       input[type="text"],
       input[type="datetime-local"] {
@@ -27,15 +43,31 @@
       }
     }
 
-    .inner-from {
-      label {
-        input[type="text"],
-        select {
-          width: 150px;
-          margin-top: 4px;
+    .result-display {
+
+      @include mobile {
+        width: 100%
+      }
+
+      .inner-form {
+      
+        @include mobile {
+          width: 100%;
+          display: flex;
+          flex-direction: column;
+        }
+        label {
+          input[type="text"],
+          select {
+            width: 150px;
+            margin-top: 4px;
+          }
         }
       }
+
     }
+
+
   }
 }
 
@@ -51,10 +83,23 @@
     border-collapse: collapse;
     border: 2px solid black;
 
-    td, th {
+    @include mobile {
+      width: 100%;
+    }
+
+    td,
+    th {
       margin: 10px;
       padding: 5px;
       text-align: center;
     }
   }
+
+  @include mobile {
+    .mobile-out {
+      display: none;
+    }
+  }
 }
+
+
