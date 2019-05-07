@@ -4,19 +4,19 @@ self.__precacheManifest = [
     "url": "/dokumenty_cyfrowe_w_medycynie/static/js/runtime~main.68604f27.js"
   },
   {
-    "revision": "da79290754accc7402cf",
-    "url": "/dokumenty_cyfrowe_w_medycynie/static/js/main.578d6398.chunk.js"
+    "revision": "94fcc4ffac15b3126123",
+    "url": "/dokumenty_cyfrowe_w_medycynie/static/js/main.1efdb374.chunk.js"
   },
   {
     "revision": "e1bbb5ede8dd1d15d597",
     "url": "/dokumenty_cyfrowe_w_medycynie/static/js/2.af65bc8f.chunk.js"
   },
   {
-    "revision": "da79290754accc7402cf",
-    "url": "/dokumenty_cyfrowe_w_medycynie/static/css/main.765d3b74.chunk.css"
+    "revision": "94fcc4ffac15b3126123",
+    "url": "/dokumenty_cyfrowe_w_medycynie/static/css/main.9b9dd270.chunk.css"
   },
   {
-    "revision": "3fd03d6b4b3b7e6e698533443e5cd2da",
+    "revision": "d2226fd7c2569a356693a6cb992bfa37",
     "url": "/dokumenty_cyfrowe_w_medycynie/index.html"
   }
 ];
