@@ -38,7 +38,8 @@ class DoctorPage extends Component {
         title: e.target.title.value,
         date: e.target.date.value.split("T").join(" "),
         completed,
-        details: e.target.details.value
+        details: e.target.details.value,
+        previousTask: e.target.previousTask.value
       })
     })
       .then(response => response.json())
@@ -77,6 +78,7 @@ class DoctorPage extends Component {
         title: document.querySelector("#title").value,
         details: document.querySelector("#details").value,
         date: document.querySelector("#date").value,
+        previousTaskId: document.querySelector("#previous-task").value,
         id: id
       })
     })
@@ -135,8 +137,6 @@ class DoctorPage extends Component {
       e.preventDefault();
       patientID = e.target.patientID.value;
       await fetch(
-
-  
         "https://medical-documentation.herokuapp.com/get-patient-data",
         {
           method: "put",

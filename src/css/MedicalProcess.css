@@ -1,7 +1,43 @@
+.medical-process-container * {
+  box-sizing: border-box;
+}
+
 @media screen and (max-width: 470px) {
   .medical-process-container {
     margin-top: 15px !important;
   }
+}
+
+.medical-process-container .change-view {
+  margin: auto;
+  display: block;
+  width: 300px;
+}
+
+.medical-process-container .change-view input[type="radio"] {
+  visibility: hidden;
+}
+
+.medical-process-container .change-view label {
+  cursor: pointer;
+  padding: 7px 13px;
+  margin: 0;
+  background: #b9b9b9;
+}
+
+.medical-process-container .change-view label.tasks-label {
+  border-radius: 15px 0 0 15px;
+  margin-right: -26px;
+}
+
+.medical-process-container .change-view label.process-label {
+  border-radius: 0 15px 15px 0;
+  margin-left: -26px;
+}
+
+.medical-process-container .change-view input[type="radio"]:checked + label {
+  background: #e4ab6a;
+  border: 1px solid #777;
 }
 
 .medical-process-container .set-done,
@@ -16,9 +52,16 @@
   font-size: 14px;
 }
 
+.medical-process-container .edit {
+  background: url("../img/edit.png");
+  background-size: cover;
+  background-color: #646464;
+}
+
 .medical-process-container .content {
   overflow-y: auto;
-  height: 50vh;
+  height: 45vh;
+  padding-right: 10px;
 }
 
 @media screen and (max-width: 470px) {
@@ -31,10 +74,10 @@
 
 .medical-process-container form {
   display: flex;
+  flex-direction: column;
   width: 100%;
   justify-content: space-between;
   align-items: center;
-  height: 70px;
 }
 
 @media screen and (max-width: 470px) {
@@ -48,10 +91,18 @@
   }
 }
 
+.medical-process-container form span {
+  height: 30px;
+  display: flex;
+  align-content: center;
+  margin: 5px;
+}
+
 .medical-process-container form input,
 .medical-process-container form select {
-  margin: 20px 5px 10px 5px;
-  flex: 2 1 250px;
+  margin: 0 5px 10px 5px;
+  width: 180px;
+  height: 30px;
 }
 
 @media screen and (max-width: 470px) {
@@ -62,10 +113,22 @@
   }
 }
 
+.medical-process-container form input.preceding-document,
+.medical-process-container form select.preceding-document {
+  width: 200px;
+}
+
+.medical-process-container form input[type="datetime-local"] {
+  width: 190px;
+}
+
+.medical-process-container form .previous-task {
+  width: 250px;
+}
+
 .medical-process-container form textarea {
-  margin: 30px 10px 0 10px;
-  height: 50px;
-  flex: 2 1 300px;
+  height: 30px;
+  width: 400px;
 }
 
 @media screen and (max-width: 470px) {
@@ -107,6 +170,10 @@
   }
 }
 
+.medical-process-container ul li .previous-task-label select {
+  margin: 0 10px;
+}
+
 .medical-process-container ul li input {
   margin: 5px 0;
 }
@@ -121,6 +188,12 @@
   width: 300px;
 }
 
+@media screen and (max-width: 470px) {
+  .medical-process-container ul li #title {
+    width: 100%;
+  }
+}
+
 .medical-process-container ul li #details {
   width: 500px;
 }
@@ -129,4 +202,21 @@
   .medical-process-container ul li #details {
     width: 100%;
   }
+}
+
+.medical-process-container .process-view {
+  overflow-y: auto;
+  height: 50vh;
+}
+
+.medical-process-container .process-view .process-task {
+  margin: 10px;
+  border: 1px solid grey;
+  width: 50%;
+  padding: 10px;
+}
+
+.medical-process-container .process-view .process-task p,
+.medical-process-container .process-view .process-task h4 {
+  margin: 5px;
 }

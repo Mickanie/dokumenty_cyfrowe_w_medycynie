@@ -1,8 +1,40 @@
 @import "_config";
 
 .medical-process-container {
+  * {
+    box-sizing: border-box;
+  }
   @include mobile {
     margin-top: 15px !important;
+  }
+  .change-view {
+    margin: auto;
+    display: block;
+    width: 300px;
+
+    input[type="radio"] {
+      visibility: hidden;
+    }
+    label {
+      cursor: pointer;
+      padding: 7px 13px;
+      margin: 0;
+      background: rgb(185, 185, 185);
+
+      &.tasks-label {
+        border-radius: 15px 0 0 15px;
+        margin-right: -26px;
+      }
+      &.process-label {
+        border-radius: 0 15px 15px 0;
+        margin-left: -26px;
+      }
+    }
+    input[type="radio"]:checked + label {
+      background: $accent-color;
+      border: 1px solid #777;
+      //box-shadow: 1px 1px 1px #333;
+    }
   }
 
   .set-done,
@@ -17,9 +49,16 @@
     font-size: 14px;
   }
 
+  .edit {
+    background: url("../img/edit.png");
+    background-size: cover;
+    background-color: rgb(100, 100, 100);
+  }
+
   .content {
     overflow-y: auto;
-    height: 50vh;
+    height: 45vh;
+    padding-right: 10px;
 
     @include mobile {
       padding: 15px;
@@ -30,10 +69,11 @@
 
   form {
     display: flex;
+    flex-direction: column;
     width: 100%;
     justify-content: space-between;
     align-items: center;
-    height: 70px;
+    //height: 70px;
 
     @include mobile {
       flex-direction: column;
@@ -43,20 +83,40 @@
         display: none;
       }
     }
+
+    span {
+      height: 30px;
+      display: flex;
+      align-content: center;
+      margin: 5px;
+    }
     input,
     select {
-      margin: 20px 5px 10px 5px;
-      flex: 2 1 250px;
+      margin: 0 5px 10px 5px;
+      width: 180px;
+      height: 30px;
       @include mobile {
         width: 80%;
         margin-top: 5px;
       }
+
+      &.preceding-document {
+        width: 200px;
+      }
+    }
+
+    input[type="datetime-local"] {
+      width: 190px;
+    }
+
+    .previous-task {
+      width: 250px;
     }
 
     textarea {
-      margin: 30px 10px 0 10px;
-      height: 50px;
-      flex: 2 1 300px;
+      height: 30px;
+      width: 400px;
+
       @include mobile {
         width: 80%;
         margin: 5px auto 10px auto;
@@ -90,6 +150,13 @@
           flex-direction: column;
         }
       }
+
+      .previous-task-label {
+        select {
+          margin: 0 10px;
+        }
+      }
+
       input {
         margin: 5px 0;
 
@@ -100,6 +167,9 @@
 
       #title {
         width: 300px;
+        @include mobile {
+          width: 100%;
+        }
       }
 
       #details {
@@ -108,6 +178,22 @@
         @include mobile {
           width: 100%;
         }
+      }
+    }
+  }
+
+  .process-view {
+    overflow-y: auto;
+    height: 50vh;
+
+    .process-task {
+      margin: 10px;
+      border: 1px solid grey;
+      width: 50%;
+      padding: 10px;
+      p,
+      h4 {
+        margin: 5px;
       }
     }
   }
