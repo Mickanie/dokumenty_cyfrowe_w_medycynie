@@ -56,8 +56,9 @@
   }
 
   .content {
+    margin-top: 30px;
     overflow-y: auto;
-    height: 45vh;
+    height: 43vh;
     padding-right: 10px;
 
     @include mobile {
@@ -73,11 +74,11 @@
     width: 100%;
     justify-content: space-between;
     align-items: center;
-    //height: 70px;
+    height: 70px;
 
     @include mobile {
       flex-direction: column;
-      height: 250px;
+      height: 300px;
       margin-top: 15px;
       p {
         display: none;
@@ -89,6 +90,14 @@
       display: flex;
       align-content: center;
       margin: 5px;
+
+      @include mobile {
+        width: 90%;
+        flex-direction: column;
+        height: 160px;
+        align-content: center;
+        margin-top: 0px;
+      }
     }
     input,
     select {
@@ -96,21 +105,30 @@
       width: 180px;
       height: 30px;
       @include mobile {
-        width: 80%;
+        width: 100%;
         margin-top: 5px;
       }
 
       &.preceding-document {
         width: 200px;
       }
+    
     }
 
     input[type="datetime-local"] {
       width: 190px;
+
+      @include mobile {
+        width: 100%;
+      }
     }
 
     .previous-task {
       width: 250px;
+
+      @include mobile {
+        width: 100%;
+      }
     }
 
     textarea {
@@ -118,8 +136,8 @@
       width: 400px;
 
       @include mobile {
-        width: 80%;
-        margin: 5px auto 10px auto;
+        width: 100%;
+        margin: 5px;
       }
     }
   }
@@ -184,16 +202,124 @@
 
   .process-view {
     overflow-y: auto;
-    height: 50vh;
+    height: 55vh;
+    @include mobile {
+      height: 100%;
+      margin: 10px;
+    }
+
+ 
+
+
+
+    .li {
+      position: relative;
+      &:before {
+        content: '';
+        border-left: 2px solid grey;
+        //height: 100%;
+        position: absolute;
+        top: 0px;
+        bottom: 28px;
+        left: 16px;
+        
+      }
+      
+    }
+
+    .next-tasks {
+      margin-left: 50px;
+      position: relative;
+      
+      &:before {
+        content: "";
+       // border-left: 2px solid grey;
+        position: absolute;
+        bottom: 50%;
+        left: -35px;
+        top: 0;
+        //height: 150%;
+      }
+
+     
+    }
+
+    .process-task ~ .next-tasks {
+      display: none;
+    }
+    .process-task.active ~ .next-tasks {
+      display: block;
+    }
 
     .process-task {
-      margin: 10px;
+      &:before {
+        content: "";
+        border-bottom: 2px solid grey;
+       // border-left: 2px solid grey;
+        position: absolute;
+        left: -35px;
+        top: -10px;
+    
+        width: 30px;
+        height: 70%;
+        z-index: 1;
+      }
+      &:after {
+        font-family: "Font Awesome 5 Free";
+        content: "\f107";
+        font-weight: 700;
+        font-size: 1.5em;
+        position: absolute;
+        right: 30px;
+        bottom: 5px;
+        color: grey;
+
+        @include mobile {
+         
+          right: 15px;
+          top: 0;
+        }
+      }
+
+      &.active:after {
+        content: "\f106";
+      }
+
+      &:last-child:after {
+        content: ''
+      }
+
+     
+
+      &:last-child:before {
+         //border-left: 2px solid transparent;
+        }
+     
+      margin: 10px 0;
       border: 1px solid grey;
-      width: 50%;
-      padding: 10px;
+      width: 70%;
+      padding: 5px 10px;
+      position: relative;
+      z-index: 2;
+      background: rgb(218, 203, 169);
+      cursor: pointer;
+      @include mobile {
+        width:90%;
+      }
       p,
       h4 {
         margin: 5px;
+      }
+
+      .date-process-task {
+        position: absolute;
+        top: 2%;
+        right: 3%;
+        color: grey;
+
+        @include mobile {
+          position: static;
+        }
       }
     }
   }

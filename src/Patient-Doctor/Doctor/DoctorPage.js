@@ -20,7 +20,7 @@ class DoctorPage extends Component {
   componentDidMount() {
     fetch("https://medical-documentation.herokuapp.com/medical-process")
       .then(result => result.json())
-      .then(data => this.setState({ tasks: data }));
+      .then(data => this.setState({ tasks:  data.sort(this.compare) }));
   }
   //MEDICAL PROCESS
   addTask = async e => {
@@ -65,7 +65,7 @@ class DoctorPage extends Component {
       })
     })
       .then(response => response.json())
-      .then(data => this.setState({ tasks: data }));
+      .then(data => this.setState({ tasks:  data.sort(this.compare) }));
 
     e.target.title.value = "";
   };
@@ -83,7 +83,7 @@ class DoctorPage extends Component {
       })
     })
       .then(result => result.json())
-      .then(data => this.setState({ tasks: data }));
+      .then(data => this.setState({ tasks: data.sort(this.compare) }));
   };
 
   setCompleted = e => {
@@ -136,6 +136,8 @@ class DoctorPage extends Component {
     if (!this.state.patientID) {
       e.preventDefault();
       patientID = e.target.patientID.value;
+      e.target.patientID.required = false;
+
       await fetch(
         "https://medical-documentation.herokuapp.com/get-patient-data",
         {
@@ -154,7 +156,8 @@ class DoctorPage extends Component {
       await fetch("https://medical-documentation.herokuapp.com/medical-process")
         .then(result => result.json())
         .then(data => {
-          this.setState({ tasks: data });
+          console.log(data.sort(this.compare));
+          this.setState({ tasks: data.sort(this.compare) });
         });
     } else {
       this.setState({ patientID: "" });
@@ -164,7 +167,26 @@ class DoctorPage extends Component {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ patientID: "" })
       });
+      e.target.patientID.required = true;
     }
+  };
+
+  compare = (a, b) => {
+    const dateA = parseInt(
+      a.date
+        .split(" ")[0]
+        .split("-")
+        .join("")
+    ) || 0;
+    const dateB = parseInt(
+      b.date
+        .split(" ")[0]
+        .split("-")
+        .join("")
+    ) || 0;
+    console.log(dateA);
+    console.log(dateB);
+    return dateA > dateB ? -1 : dateA < dateB ? 1 : 0;
   };
 
   render() {

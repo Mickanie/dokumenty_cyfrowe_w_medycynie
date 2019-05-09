@@ -2,12 +2,12 @@
 
 Projekt z Dokumentów Cyfrowych w Medycynie
 
-### Testowe dane logowania:
+#### Testowe dane logowania:
 
 - konto lekarza: login D10000 hasło doktor,
 - konto laboranta: login L10000 hasło laborant,
 - konto pacjenta: login P12345 hasło 123,
-- konto pacjenta: login P11111 hasło abc)
+- konto pacjenta: login P11111 hasło abc
 
 #### Link do strony
 
@@ -41,8 +41,10 @@ Do zrobienia
 - [x] edycja zadań i danych pacjenta
 - [x] raporty HTM badań laboratoryjnych
 - [x] zagwarantowanie responsywności
-- [ ] zagwarantowanie bezpieczeństwa
+- [ ] zagwarantowanie bezpieczeństwa 
 - [ ] połączenia między dokumentami (np. id zlecenia do wyników badań)
+- [x] połączenie zadań z poprzedzającymi i następującymi
+- [x] widok procesu medycznego
 
 Baza danych
 

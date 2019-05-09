@@ -28,6 +28,11 @@ class MedicalProcess extends Component {
     this.setState({ view: e.target.value });
   };
 
+  toggleActive = e => {
+    console.log("click");
+    e.target.parentElement.classList.toggle("active");
+  };
+
   render() {
     return (
       <div className="container medical-process-container">
@@ -264,58 +269,32 @@ class MedicalProcess extends Component {
           </div>
         )}
         {this.state.view === "process" && (
-          <div className="process-view">
+          <div className="process-view ul">
             {this.props.tasks
               .filter(task => task.previousTask === "")
               .map((task, i) => {
+                const color = task.completed
+                  ? "rgb(218, 203, 169)"
+                  : "rgb(206, 206, 193)";
                 return (
-                  <div key={i}>
-                    <div className="process-task">
+                  <div className="li" key={i}>
+                    <div
+                      className="process-task li"
+                      style={{ background: color }}
+                      onClick={this.toggleActive}
+                    >
                       {" "}
                       <h4>{task.title}</h4>
-                      <p>{task.date}</p>
+                      <p className="date-process-task">{task.date}</p>
                       <p>{task.details}</p>{" "}
                     </div>
-                    {task.nextTasks.map((nextTaskId, i) => {
-                      const nextTask = this.props.tasks.filter(
-                        task => task._id === nextTaskId
-                      )[0];
-                      console.log(nextTaskId);
-                      console.log(nextTask);
-                      return (
-                        <div key={i}>
-                          <div
-                            className="process-task"
-                            style={{ marginLeft: "50px" }}
-                          >
-                            {" "}
-                            <h4>{nextTask.title}</h4>
-                            <p>{nextTask.date}</p>
-                            <p>{nextTask.details}</p>{" "}
-                          </div>
-                          {nextTask.nextTasks.map((nextTaskId, i) => {
-                            const nextTask = this.props.tasks.filter(
-                              task => task._id === nextTaskId
-                            )[0];
-                            console.log(nextTaskId);
-                            console.log(nextTask);
-                            return (
-                              <div key={i}>
-                                <div
-                                  className="process-task"
-                                  style={{ marginLeft: "50px" }}
-                                >
-                                  {" "}
-                                  <h4>{nextTask.title}</h4>
-                                  <p>{nextTask.date}</p>
-                                  <p>{nextTask.details}</p>{" "}
-                                </div>
-                              </div>
-                            );
-                          })}
-                        </div>
-                      );
-                    })}
+                    {task.nextTasks.length > 0 && (
+                      <Task
+                        task={task}
+                        tasks={this.props.tasks}
+                        toggleActive={this.toggleActive}
+                      />
+                    )}
                   </div>
                 );
               })}
@@ -327,3 +306,30 @@ class MedicalProcess extends Component {
 }
 
 export default MedicalProcess;
+
+const Task = props => {
+  console.log(props.tasks);
+  return props.task.nextTasks.map((nextTaskId, i) => {
+    const nextTask = props.tasks.filter(task => task._id === nextTaskId)[0];
+    const color = nextTask.completed
+      ? "rgb(218, 203, 169)"
+      : "rgb(206, 206, 193)";
+    return (
+      <div className="next-tasks ul" key={i}>
+        <div
+          className="process-task li "
+          style={{ background: color }}
+          onClick={props.toggleActive}
+        >
+          {" "}
+          <h4>{nextTask.title}</h4>
+          <p className="date-process-task">{nextTask.date}</p>
+          <p>{nextTask.details}</p>{" "}
+        </div>
+        {nextTask.nextTasks.length > 0 && (
+          <Task task={nextTask} tasks={props.tasks} toggleActive={props.toggleActive} />
+        )}
+      </div>
+    );
+  });
+};
