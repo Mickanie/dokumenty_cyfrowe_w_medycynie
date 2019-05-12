@@ -4,10 +4,10 @@ import "../../css/NewAttachment.css";
 import { today, threeDaysAgo } from "../../DateParser";
 
 class NewAttachment extends Component {
-
   state = {
     startDate: ""
-  }
+  };
+
   submitAttachment = async e => {
     e.preventDefault();
 
@@ -40,7 +40,7 @@ class NewAttachment extends Component {
       case "referral":
         const { place, examination, diagnosis, aim } = e.target;
         attachedDocument = {
-          title: `Skierowanie do ${place.value}`,
+          title: `Skierowanie na ${examination.value} ${date.value}`,
           issueDate: date.value,
           place: place.value,
           examination: examination.value,
@@ -58,6 +58,7 @@ class NewAttachment extends Component {
         console.log(labTests);
         attachedDocument = {
           title: `Zlecenie badań laboratoryjnych ${date.value}`,
+          date: date.value,
           labTests: labTests,
           type: "zlecenie badań"
         };
@@ -80,9 +81,9 @@ class NewAttachment extends Component {
     this.props.history.push("/recommendations/create-new");
   };
 
-  setStartDate = (e) => {
-    this.setState({startDate: e.target.value})
-  }
+  setStartDate = e => {
+    this.setState({ startDate: e.target.value });
+  };
 
   render() {
     const documentType = this.props.documentType;
@@ -215,7 +216,7 @@ class NewAttachment extends Component {
           <div>
             <h2>Nowe zlecenie na badanie</h2>
             <form className="lab-order-form" onSubmit={this.submitAttachment}>
-              <label>
+              <label className="date-label">
                 Data:
                 <input
                   type="date"
@@ -225,14 +226,11 @@ class NewAttachment extends Component {
                   defaultValue={today}
                 />
               </label>
+
               <div className="tests">
                 <label>
-                  <input type="checkbox" name="test" value="OB" />
-                  OB
-                </label>
-                <label>
-                  <input type="checkbox" name="test" value="Glukoza" />
-                  Glukoza
+                  <input type="checkbox" name="test" value="Morfologia" />
+                  Morfologia
                 </label>
                 <label>
                   <input type="checkbox" name="test" value="LDL" />
@@ -243,12 +241,32 @@ class NewAttachment extends Component {
                   HDL
                 </label>
                 <label>
+                  <input type="checkbox" name="test" value="TC" />
+                  TC
+                </label>
+                <label>
+                  <input type="checkbox" name="test" value="Glukoza" />
+                  Glukoza
+                </label>
+
+                <label>
                   <input type="checkbox" name="test" value="TG" />
                   Trójglicerydy
                 </label>
+
                 <label>
-                  <input type="checkbox" name="test" value="Morfologia" />
-                  Morfologia
+                  <input type="checkbox" name="test" value="Kwas moczowy" />
+                  Keas moczowy
+                </label>
+
+                <label>
+                  <input type="checkbox" name="test" value="TP" />
+                  TP
+                </label>
+
+                <label>
+                  <input type="checkbox" name="test" value="TBIL" />
+                  TBIL
                 </label>
                 <label>
                   <input type="checkbox" name="test" value="Magnez" />
@@ -265,6 +283,34 @@ class NewAttachment extends Component {
                 <label>
                   <input type="checkbox" name="test" value="Żelazo" />
                   Żelazo
+                </label>
+                <label>
+                  <input type="checkbox" name="test" value="Wapń" />
+                  Wapń
+                </label>
+                <label>
+                  <input type="checkbox" name="test" value="ALAT" />
+                  ALAT
+                </label>
+                <label>
+                  <input type="checkbox" name="test" value="ASPAT" />
+                  ASPAT
+                </label>
+                <label>
+                  <input type="checkbox" name="test" value="TSH" />
+                  TSH
+                </label>
+                <label>
+                  <input type="checkbox" name="test" value="FT3" />
+                  FT3
+                </label>
+                <label>
+                  <input type="checkbox" name="test" value="FT4" />
+                  FT4
+                </label>
+                <label>
+                  <input type="checkbox" name="test" value="OB" />
+                  OB
                 </label>
               </div>
 

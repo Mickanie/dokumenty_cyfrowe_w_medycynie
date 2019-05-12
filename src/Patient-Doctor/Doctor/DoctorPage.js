@@ -17,8 +17,8 @@ class DoctorPage extends Component {
     tasks: []
   };
 
-  componentDidMount() {
-    fetch("https://medical-documentation.herokuapp.com/medical-process")
+  async componentDidMount() {
+    await fetch("https://medical-documentation.herokuapp.com/medical-process")
       .then(result => result.json())
       .then(data => this.setState({ tasks:  data.sort(this.compare) }));
   }
@@ -87,7 +87,7 @@ class DoctorPage extends Component {
   };
 
   setCompleted = e => {
-    //console.log(e.target.id);
+
     const id = e.target.id;
     this.setState({
       tasks: this.state.tasks.map((task, i) => {
@@ -123,8 +123,6 @@ class DoctorPage extends Component {
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ id: id, completed: isCompleted })
     });
-    /* .then(response => response.json())
-      .then(data => this.setState({ tasks: data })); */
   };
 
   searchPatient = async e => {
@@ -156,7 +154,7 @@ class DoctorPage extends Component {
       await fetch("https://medical-documentation.herokuapp.com/medical-process")
         .then(result => result.json())
         .then(data => {
-          console.log(data.sort(this.compare));
+
           this.setState({ tasks: data.sort(this.compare) });
         });
     } else {
@@ -184,8 +182,7 @@ class DoctorPage extends Component {
         .split("-")
         .join("")
     ) || 0;
-    console.log(dateA);
-    console.log(dateB);
+
     return dateA > dateB ? -1 : dateA < dateB ? 1 : 0;
   };
 
