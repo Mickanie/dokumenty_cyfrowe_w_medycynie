@@ -122,7 +122,7 @@ class LabTechnicianPage extends Component {
         <form className="form" onSubmit={this.submitResult}>
           <label htmlFor="patientID" className="mainLabel">
             ID pacjenta{" "}
-            <input name="patientID" type="text" required pattern="[0-9]{5}" onChange={this.choosePatient}/>
+            <input name="patientID" type="text" required pattern="[0-9]{5}" placeholder=" " onChange={this.choosePatient}/>
           </label>
 
           <label className="mainLabel">
@@ -142,7 +142,7 @@ class LabTechnicianPage extends Component {
           </label>
           <label htmlFor="orderingDoctor" className="mainLabel">
             Lekarz zlecający{" "}
-            <input name="orderingDoctor" type="text" required  disabled={!this.state.patientID}/>
+            <input name="orderingDoctor" type="text" required placeholder=" " disabled={!this.state.patientID}/>
           </label>
           <label htmlFor="collectionDate" className="mainLabel">
             Data pobrania <input name="collectionDate" type="datetime-local"  disabled={!this.state.patientID} />

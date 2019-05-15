@@ -106,11 +106,11 @@ class Register extends Component {
           </span>
           <span>
             <label htmlFor="name">Imię </label>
-            <input type="text" name="name" required />
+            <input type="text" name="name" required placeholder=" " pattern="[A-Za-z]{3,}"/>
           </span>
           <span>
             <label htmlFor="surname">Nazwisko </label>
-            <input type="text" name="surname" required />
+            <input type="text" name="surname" required placeholder=" " pattern="[A-Za-z]{3,}"/>
           </span>
 
           {this.state.accountType === "patient" && (
@@ -121,7 +121,7 @@ class Register extends Component {
               </span>
               <span>
                 <label htmlFor="surname">Adres </label>
-                <input type="text" name="address" required />
+                <input type="text" name="address" required placeholder=" "/>
               </span>
               <span>
                 <label htmlFor="surname">Telefon </label>
@@ -130,6 +130,7 @@ class Register extends Component {
                   name="telephone"
                   required
                   pattern="[0-9]{9}"
+                  placeholder=" "
                 />
               </span>
               <span>
@@ -140,11 +141,17 @@ class Register extends Component {
                   id="pesel"
                   required
                   pattern="[0-9]{11}"
+                  placeholder=" "
                 />
               </span>
               <span>
                 <label htmlFor="surname">Płeć </label>
-                <input type="text" name="sex" required />
+                <select name="sex" defaultValue="" required>
+                  <option value="" disabled>Wybierz płeć</option>
+                  <option value="K">Kobieta</option>
+                  <option value="M">Mężczyzna</option>
+                </select>
+               
               </span>
             </>
           )}
@@ -169,6 +176,7 @@ class Register extends Component {
               type="password"
               required
               id="password"
+              
               //pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*_=+-]).{8,12}$"
             />
           </span>

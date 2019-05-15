@@ -117,7 +117,7 @@ class NewAttachment extends Component {
                 />
               </label>
               <label>
-                Odpłatność: <input type="text" name="payment" required />
+                Odpłatność: <input type="text" name="payment" required placeholder=" "/>
               </label>
               <label>
                 Data od dnia: <input type="date" name="startDate" />
@@ -202,10 +202,10 @@ class NewAttachment extends Component {
                 />
               </label>
               <label>
-                Rozpoznanie: <input type="text" name="diagnosis" required />
+                Rozpoznanie: <input type="text" name="diagnosis" required placeholder=" " />
               </label>
               <label>
-                Cel: <input type="text" name="aim" required />
+                Cel: <input type="text" name="aim" required placeholder=" "/>
               </label>
               <input type="submit" value="Dodaj" />
             </form>

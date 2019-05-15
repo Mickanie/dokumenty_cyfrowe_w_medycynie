@@ -269,7 +269,7 @@ class MedicalProcess extends Component {
           </div>
         )}
         {this.state.view === "process" && (
-          <div className="process-view ul">
+          <div className="process-view">
             {this.props.tasks
               .filter(task => task.previousTask === "")
               .map((task, i) => {
@@ -277,9 +277,9 @@ class MedicalProcess extends Component {
                   ? "rgb(218, 203, 169)"
                   : "rgb(206, 206, 193)";
                 return (
-                  <div className="li" key={i}>
+                  <div className="process-task-list-item" key={i}>
                     <div
-                      className="process-task li"
+                      className="process-task"
                       style={{ background: color }}
                       onClick={this.toggleActive}
                     >
@@ -288,12 +288,15 @@ class MedicalProcess extends Component {
                       <p className="date-process-task">{task.date}</p>
                       <p>{task.details}</p>{" "}
                     </div>
+
                     {task.nextTasks.length > 0 && (
-                      <Task
-                        task={task}
-                        tasks={this.props.tasks}
-                        toggleActive={this.toggleActive}
-                      />
+                      <ul className="next-tasks">
+                        <Task
+                          task={task}
+                          tasks={this.props.tasks}
+                          toggleActive={this.toggleActive}
+                        />
+                      </ul>
                     )}
                   </div>
                 );
@@ -315,9 +318,9 @@ const Task = props => {
       ? "rgb(218, 203, 169)"
       : "rgb(206, 206, 193)";
     return (
-      <div className="next-tasks ul" key={i}>
+      <li className="next-task" key={i}>
         <div
-          className="process-task li "
+          className="process-task  "
           style={{ background: color }}
           onClick={props.toggleActive}
         >
@@ -326,10 +329,17 @@ const Task = props => {
           <p className="date-process-task">{nextTask.date}</p>
           <p>{nextTask.details}</p>{" "}
         </div>
+
         {nextTask.nextTasks.length > 0 && (
-          <Task task={nextTask} tasks={props.tasks} toggleActive={props.toggleActive} />
+          <ul className="next-tasks">
+            <Task
+              task={nextTask}
+              tasks={props.tasks}
+              toggleActive={props.toggleActive}
+            />
+          </ul>
         )}
-      </div>
+      </li>
     );
   });
 };

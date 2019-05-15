@@ -114,13 +114,13 @@ class NewDocument extends Component {
               <label>
                 {" "}
                 Lekarz zlecający:{" "}
-                <input type="text" name="orderingDoctor" required />
+                <input type="text" name="orderingDoctor" required placeholder="Imię i nazwisko lekarza"/>
               </label>
 
               <label>
                 {" "}
                 Lekarz wykonujący:{" "}
-                <input type="text" name="performingDoctor" required />
+                <input type="text" name="performingDoctor" required placeholder="Imię i nazwisko lekarza" />
               </label>
               <label>
                 {" "}

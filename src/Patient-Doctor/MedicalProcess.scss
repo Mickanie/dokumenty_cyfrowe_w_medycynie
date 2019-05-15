@@ -200,17 +200,10 @@
     }
   }
 
-  .process-view {
-    overflow-y: auto;
-    height: 55vh;
-    @include mobile {
-      height: 100%;
-      margin: 10px;
-    }
 
  
 
-
+/*
 
     .li {
       position: relative;
@@ -224,6 +217,7 @@
         left: 16px;
         
       }
+  
       
     }
 
@@ -240,6 +234,9 @@
         top: 0;
         //height: 150%;
       }
+      &:last-child:before {
+        border-left: 2px solid transparent;
+       }
 
      
     }
@@ -291,9 +288,7 @@
 
      
 
-      &:last-child:before {
-         //border-left: 2px solid transparent;
-        }
+     
      
       margin: 10px 0;
       border: 1px solid grey;
@@ -321,6 +316,147 @@
           position: static;
         }
       }
+    }*/
+
+
+
+  .process-view {
+    overflow-y: auto;
+    height: 55vh;
+    
+    border-left: 2px solid transparent;
+    @include mobile {
+      height: 100%;
+      margin: 10px;
     }
+
+
+    .next-tasks {
+      margin-left: 50px;
+      position: relative;
+      
+    
+
+     
+    }
+
+    .process-task ~ .next-tasks {
+      display: none;
+    }
+    .process-task.active ~ .next-tasks {
+      display: block;
+    }
+
+    .process-task {
+     
+      &:after {
+        font-family: "Font Awesome 5 Free";
+        content: "\f107";
+        font-weight: 700;
+        font-size: 1.5em;
+        position: absolute;
+        right: 30px;
+        bottom: 5px;
+        color: grey;
+
+        @include mobile {
+         
+          right: 15px;
+          top: 0;
+        }
+      }
+
+      &.active:after {
+        content: "\f106";
+      }
+
+      &:last-child:after {
+        content: ''
+      }
+
+     
+
+     
+     
+      margin: 10px 0;
+      border: 1px solid grey;
+      width: 70%;
+      padding: 5px 10px;
+      position: relative;
+   
+      background: rgb(218, 203, 169);
+      cursor: pointer;
+      @include mobile {
+        width:90%;
+      }
+      p,
+      h4 {
+        margin: 5px;
+      }
+
+      .date-process-task {
+        position: absolute;
+        top: 2%;
+        right: 3%;
+        color: grey;
+
+        @include mobile {
+          position: static;
+        }
+      }
+    }
+
+        ul {
+      padding: 0;
+      margin: 0;
+      
+      list-style-type: none;
+      position: relative;
   }
+  
+  li {
+      list-style-type: none;
+      border-left: 2px solid #000;
+      margin-bottom: 0;
+      padding-left: 27px;
+      margin-left: 30px;
+      @include mobile {
+        margin-left: 10px;
+        
+      }
+    
+    
+  }
+  
+  li div {
+      padding-left: 2em;
+      position: relative;
+      
+      
+  }
+  
+  li div::before {
+      content: '';
+      position: absolute;
+      top: -20%;
+      left: -30px;
+      bottom: 50%;
+      width: 2em;
+      border: 2px solid #000;
+      border-top: 0 none transparent;
+      border-right: 0 none transparent;
+
+      @include mobile {
+        top: -12%;
+      }
+     
+  }
+  
+  ul > li:last-child {
+      border-left: 2px solid transparent;
+  }
+  }
+
+  
+  
 }
