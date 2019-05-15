@@ -1,13 +1,18 @@
 # System wspierania szpitala w rejestracji dokumentów cyfrowych
 
-Projekt z Dokumentów Cyfrowych w Medycynie
+## Projekt z Dokumentów Cyfrowych w Medycynie
+Aplikacja internetowa w wersji desktop i mobile do przeglądania dokumentacji medycznej pacjentów, z możliwością edycji danych przez konto lekarza, dodawania dokumentów, zadań, zaleceń przez lekarza i wyników badań przez laboranta.
+
+Technologie: React, Node.js, Express.js, Sass.
+
+Baza danych: MongoDB (Atlas)
 
 #### Testowe dane logowania:
 
 - konto lekarza: login D10000 / D10001 hasło doktor,
 - konto laboranta: login L10000 / L10001 hasło laborant,
 - konto pacjenta: login P12345 hasło 123,
-- konto pacjenta: login P11111 hasło abc
+- konto pacjenta: login P11111 hasło abc.
 
 #### Testowe ID pacjentów do wybierania przez lekarza / laboranta
 
@@ -16,7 +21,7 @@ W panelu Lekarza należy podać ciąg 5 znaków, żeby zobaczyć dane o Pacjenci
 - 11111
 - 12345
 
-Podobnie przy dodawaniu wyniku badań laboratoryjnych przez Laboranta
+Podobnie przy dodawaniu wyniku badań laboratoryjnych przez laboranta
 
 #### Link do strony
 
