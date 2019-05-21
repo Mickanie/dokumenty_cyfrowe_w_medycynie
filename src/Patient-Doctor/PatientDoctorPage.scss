@@ -29,6 +29,11 @@ nav {
   position: absolute;
   top: 10px;
   left: 30%;
+  display: flex;
+
+  .id-info {
+    width: 200px;
+  }
 
   @include mobile {
     top: 60px;
