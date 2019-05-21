@@ -22,14 +22,12 @@ class DoctorPage extends Component {
     await fetch("https://medical-documentation.herokuapp.com/medical-process")
       .then(result => result.json())
       .then(data => this.setState({ tasks: data.sort(this.compare) }));
-    await fetch("http://localhost:3001/patients")
+    await fetch("https://medical-documentation.herokuapp.com/patients")
       .then(result => result.json())
-      .then(data =>{
+      .then(data => {
         console.log(data);
-        this.setState({ patients: data.map(patient => patient.id) })
-        
+        this.setState({ patients: data.map(patient => patient.id) });
       });
-       
   }
   //MEDICAL PROCESS
   addTask = async e => {
@@ -176,7 +174,7 @@ class DoctorPage extends Component {
         });
     } else {
       this.setState({ patientID: "" });
-      //e.target.patientID.value = "";
+
       fetch("https://medical-documentation.herokuapp.com/get-patient-data", {
         method: "put",
         headers: { "Content-Type": "application/json" },
@@ -213,7 +211,7 @@ class DoctorPage extends Component {
           {patientID ? (
             <p className="id-info">{patientID}</p>
           ) : (
-            <select name="patientID">
+            <select name="patientID" defaultValue="">
               <option value="" disabled>
                 Wybierz pacjenta
               </option>

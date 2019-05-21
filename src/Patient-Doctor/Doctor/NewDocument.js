@@ -25,7 +25,7 @@ class NewDocument extends Component {
   createDocument = e => {
     //console.log(e.target);
     e.preventDefault();
-    console.log(e.target.files.value)
+    console.log(e.target.files.value);
     const title = `${this.state.documentType}: ${
       e.target.region ? e.target.region.value : ""
     }  ${e.target.testDate.value.split("T")[0]}`;
@@ -40,8 +40,7 @@ class NewDocument extends Component {
         referralID: e.target.referral.value,
         orderingDoctor: e.target.orderingDoctor.value,
         performingDoctor: e.target.performingDoctor.value,
-        content: e.target.content.value,
-        
+        content: e.target.content.value
       }),
       files: e.target.files.value
     });

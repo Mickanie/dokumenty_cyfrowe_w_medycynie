@@ -31,8 +31,17 @@ nav {
   left: 30%;
   display: flex;
 
+  .id-info,
+  select {
+    width: 150px;
+    margin: 20px;
+    padding: 5px;
+  }
+
   .id-info {
-    width: 200px;
+    padding-left: 24px;
+    padding-top: 10px;
+    width: 120px;
   }
 
   @include mobile {

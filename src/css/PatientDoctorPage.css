@@ -35,8 +35,17 @@ nav a.active {
   display: flex;
 }
 
+.ID-form .id-info,
+.ID-form select {
+  width: 150px;
+  margin: 20px;
+  padding: 5px;
+}
+
 .ID-form .id-info {
-  width: 200px;
+  padding-left: 24px;
+  padding-top: 10px;
+  width: 120px;
 }
 
 @media screen and (max-width: 590px) {
