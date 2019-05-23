@@ -1,5 +1,5 @@
 {
-  "main.css": "/dokumenty_cyfrowe_w_medycynie/static/css/main.eb349f00.chunk.css",
+  "main.css": "/dokumenty_cyfrowe_w_medycynie/static/css/main.e75367d5.chunk.css",
   "main.js": "/dokumenty_cyfrowe_w_medycynie/static/js/main.06f6dead.chunk.js",
   "main.js.map": "/dokumenty_cyfrowe_w_medycynie/static/js/main.06f6dead.chunk.js.map",
   "runtime~main.js": "/dokumenty_cyfrowe_w_medycynie/static/js/runtime~main.68604f27.js",
@@ -7,7 +7,7 @@
   "static/js/2.383eead6.chunk.js": "/dokumenty_cyfrowe_w_medycynie/static/js/2.383eead6.chunk.js",
   "static/js/2.383eead6.chunk.js.map": "/dokumenty_cyfrowe_w_medycynie/static/js/2.383eead6.chunk.js.map",
   "index.html": "/dokumenty_cyfrowe_w_medycynie/index.html",
-  "precache-manifest.840b10d5e70035c832ee790afce58f3c.js": "/dokumenty_cyfrowe_w_medycynie/precache-manifest.840b10d5e70035c832ee790afce58f3c.js",
+  "precache-manifest.8ce3f96d395981e25ec4d69e2f22f34c.js": "/dokumenty_cyfrowe_w_medycynie/precache-manifest.8ce3f96d395981e25ec4d69e2f22f34c.js",
   "service-worker.js": "/dokumenty_cyfrowe_w_medycynie/service-worker.js",
-  "static/css/main.eb349f00.chunk.css.map": "/dokumenty_cyfrowe_w_medycynie/static/css/main.eb349f00.chunk.css.map"
+  "static/css/main.e75367d5.chunk.css.map": "/dokumenty_cyfrowe_w_medycynie/static/css/main.e75367d5.chunk.css.map"
 }
