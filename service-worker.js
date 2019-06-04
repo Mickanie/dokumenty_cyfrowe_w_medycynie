@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/3.6.3/workbox-sw.js");
 
 importScripts(
-  "/dokumenty_cyfrowe_w_medycynie/precache-manifest.11c0bdd19b1d1a189576ca322bb3f739.js"
+  "/dokumenty_cyfrowe_w_medycynie/precache-manifest.5646adcb33639ac75a76196e3e03013d.js"
 );
 
 workbox.clientsClaim();
